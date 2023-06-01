@@ -6,18 +6,16 @@ import './index.css'
 
 const strokeWidth = '2'
 
-export const AcousticGuitar = () => {
+export const Guitar = ({ x, y }) => {
   const { isTurnedOn, setIsTurnedOn, currentGuitarIndex } = useContext(InteractiveWallContext)
   const [isActive, setIsActive] = useState(false)
-
-  console.log(isTurnedOn)
 
   useEffect(() => {
     if (!isTurnedOn) setIsActive(false)
   }, [isTurnedOn])
 
   return (
-    <div className="acoustic-guitar-container">
+    <div style={{ position: 'absolute', top: x, left: y }}>
       <svg
         className={`acoustic-guitar-svg ${isActive ? 'active' : ''}`}
         viewBox="0 0 370.80182 992.01428"

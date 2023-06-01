@@ -1,15 +1,21 @@
 import { createContext, useRef, useState } from 'react'
-import { AcousticGuitar } from './components/guitar'
+import { Guitar } from './components/guitar'
 
 import './App.css'
 import { Audios } from './components/audio'
+import { Scratch } from './components/scratch'
+import { Saxophone } from './components/saxophone'
+import { Drum } from './components/drum'
+import { Shaker } from './components/shaker'
+import { Piano } from './components/piano'
+import { Cello } from './components/cello'
 
 // const client = new w3cwebsocket("ws://localhost:8025/processing");
 export const InteractiveWallContext = createContext()
 function App() {
   const [isTurnedOn, setIsTurnedOn] = useState(true)
 
-  const currentBeatIndex = useRef(-1)
+  const currentDrumIndex = useRef(-1)
   const currentCelloIndex = useRef(-1)
   const currentGuitarIndex = useRef(-1)
   const currentPianoIndex = useRef(-1)
@@ -22,7 +28,7 @@ function App() {
       value={{
         isTurnedOn,
         setIsTurnedOn,
-        currentBeatIndex,
+        currentDrumIndex,
         currentCelloIndex,
         currentGuitarIndex,
         currentPianoIndex,
@@ -32,7 +38,15 @@ function App() {
       }}
     >
       <Audios>
-        <AcousticGuitar />
+        <div style={{ position: 'relative' }}>
+          <Guitar x={100} y={100} />
+          <Scratch x={100} y={300} />
+          <Drum x={100} y={500} />
+          <Piano x={100} y={900} />
+          <Saxophone x={100} y={100} />
+          <Shaker x={100} y={100} />
+          <Cello x={500} y={500}/>
+        </div>
       </Audios>
     </InteractiveWallContext.Provider>
   )

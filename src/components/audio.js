@@ -63,7 +63,7 @@ import { InteractiveWallContext } from '../App'
 
 export const Audios = ({ children }) => {
   const {
-    currentBeatIndex,
+    currentDrumIndex,
     currentCelloIndex,
     currentGuitarIndex,
     currentPianoIndex,
@@ -100,7 +100,7 @@ export const Audios = ({ children }) => {
     if (beats.length > 0) {
       beats.forEach((beat, idx) => {
         if (beat.state() === 'loaded') {
-          if (idx === currentBeatIndex.current) !beat.playing() && beat.play()
+          if (idx === currentDrumIndex.current) !beat.playing() && beat.play()
           else beat.playing() && beat.stop()
         }
       })
@@ -162,7 +162,7 @@ export const Audios = ({ children }) => {
   }, [
     trigger,
     currentGuitarIndex,
-    currentBeatIndex,
+    currentDrumIndex,
     currentCelloIndex,
     currentPianoIndex,
     currentSaxoIndex,
@@ -188,7 +188,7 @@ export const Audios = ({ children }) => {
       <div>
         <button
           onClick={() => {
-            currentBeatIndex.current = beats.length - 1 === currentBeatIndex.current ? -1 : currentBeatIndex.current + 1
+            currentDrumIndex.current = beats.length - 1 === currentDrumIndex.current ? -1 : currentDrumIndex.current + 1
           }}
         >
           change Beat
