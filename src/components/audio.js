@@ -70,13 +70,13 @@ const timeSnap = (60 / tempo) * 1000 * 8 // Assuming a 4/4 time signature
 
 const beats = [
   new Howl({ src: beat1, loop: true, volume: 2.0 }),
-  // new Howl({ src: beat2, loop: true, volume: 1.5 }),
-  // new Howl({ src: beat3, loop: true, volume: 1.5 }),
-  // new Howl({ src: beat4, loop: true, volume: 1.5 }),
-  // new Howl({ src: beat5, loop: true, volume: 1.5 }),
-  // new Howl({ src: beat6, loop: true, volume: 1.5 }),
-  // new Howl({ src: beat7, loop: true, volume: 1.5 }),
-  // new Howl({ src: beat8, loop: true, volume: 1.5 }),
+  new Howl({ src: beat2, loop: true, volume: 1.5 }),
+  new Howl({ src: beat3, loop: true, volume: 1.5 }),
+  new Howl({ src: beat4, loop: true, volume: 1.5 }),
+  new Howl({ src: beat5, loop: true, volume: 1.5 }),
+  new Howl({ src: beat6, loop: true, volume: 1.5 }),
+  new Howl({ src: beat7, loop: true, volume: 1.5 }),
+  new Howl({ src: beat8, loop: true, volume: 1.5 }),
 ]
 
 const cellos = [
@@ -88,23 +88,23 @@ const cellos = [
 
 const guitars = [
   new Howl({ src: guitar3, loop: true }),
-  // new Howl({ src: guitar4, loop: true }),
-  // new Howl({ src: guitar5, loop: true }),
-  // new Howl({ src: guitar6, loop: true }),
-  // new Howl({ src: guitar1, loop: true }),
-  // new Howl({ src: guitar2, loop: true }),
+  new Howl({ src: guitar4, loop: true }),
+  new Howl({ src: guitar5, loop: true }),
+  new Howl({ src: guitar6, loop: true }),
+  new Howl({ src: guitar1, loop: true }),
+  new Howl({ src: guitar2, loop: true }),
 ]
 
 const pianos = [
   new Howl({ src: piano1, loop: true }),
-  // new Howl({ src: piano2, loop: true }),
-  // new Howl({ src: piano3, loop: true }),
-  // new Howl({ src: piano4, loop: true }),
-  // new Howl({ src: piano5, loop: true }),
-  // new Howl({ src: piano6, loop: true }),
-  // new Howl({ src: piano7, loop: true }),
-  // new Howl({ src: piano8, loop: true }),
-  // new Howl({ src: piano9, loop: true }),
+  new Howl({ src: piano2, loop: true }),
+  new Howl({ src: piano3, loop: true }),
+  new Howl({ src: piano4, loop: true }),
+  new Howl({ src: piano5, loop: true }),
+  new Howl({ src: piano6, loop: true }),
+  new Howl({ src: piano7, loop: true }),
+  new Howl({ src: piano8, loop: true }),
+  new Howl({ src: piano9, loop: true }),
 ]
 
 const saxos = [
@@ -138,7 +138,7 @@ export const Audios = ({ children }) => {
   const currentScratchIndex = useRef(-1)
   const currentShakerIndex = useRef(-1)
 
-  const { setOngoingInstruments, trigger, setTrigger } = useContext(InteractiveWallContext)
+  const { setOngoingInstruments, trigger, setTrigger, setScale, scale } = useContext(InteractiveWallContext)
 
   useEffect(() => {
     console.log(client)
@@ -282,10 +282,20 @@ export const Audios = ({ children }) => {
       <div>
         <button
           onClick={() => {
+            if (scale === 'scale(1,1)') {
+              setScale('scale(1.05,1.05)')
+            } else {
+              setScale('scale(1,1)')
+            }
             console.log('bbb')
+            setOngoingInstruments((c) => {
+              if (c.length === 0) setTrigger(new Date())
+              return [...c.filter((c) => c !== SENSOR_ENUMS.Drum), SENSOR_ENUMS.Drum]
+            })
+
             currentBeatIndex.current = beats.length - 1 === currentBeatIndex.current ? -1 : currentBeatIndex.current + 1
-            currentGuitarIndex.current =
-              guitars.length - 1 === currentGuitarIndex.current ? -1 : currentGuitarIndex.current + 1
+            // currentGuitarIndex.current =
+            //   guitars.length - 1 === currentGuitarIndex.current ? -1 : currentGuitarIndex.current + 1
           }}
         >
           change Beat
@@ -302,6 +312,12 @@ export const Audios = ({ children }) => {
 
         <button
           onClick={() => {
+            //Below code is testing purpose
+            setOngoingInstruments((c) => {
+              if (c.length === 0) setTrigger(new Date())
+              return [...c.filter((c) => c !== SENSOR_ENUMS.Guitar), SENSOR_ENUMS.Guitar]
+            })
+
             currentGuitarIndex.current =
               guitars.length - 1 === currentGuitarIndex.current ? -1 : currentGuitarIndex.current + 1
           }}
@@ -311,6 +327,11 @@ export const Audios = ({ children }) => {
 
         <button
           onClick={() => {
+            //Below code is testing purpose
+            setOngoingInstruments((c) => {
+              if (c.length === 0) setTrigger(new Date())
+              return [...c.filter((c) => c !== SENSOR_ENUMS.Piano), SENSOR_ENUMS.Piano]
+            })
             currentPianoIndex.current =
               pianos.length - 1 === currentPianoIndex.current ? -1 : currentPianoIndex.current + 1
           }}

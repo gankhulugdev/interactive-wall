@@ -1,12 +1,18 @@
 // import drumSet from '/drum-set.svg'
 import { useContext, useEffect, useState } from 'react'
 import { InteractiveWallContext } from '../../App'
-import { pianos } from '../audio'
 import './index.css'
+import { SENSOR_ENUMS } from '../../enums'
 
 export const Piano = ({ x, y }) => {
-  const {} = useContext(InteractiveWallContext)
+  const { ongoingInstruments } = useContext(InteractiveWallContext)
   const [isActive, setIsActive] = useState(false)
+  
+  useEffect(() => {
+    if (ongoingInstruments.includes(SENSOR_ENUMS.Piano) && !isActive) {
+      setIsActive(true)
+    } else if (ongoingInstruments.length === 0) setIsActive(false)
+  }, [ongoingInstruments])
 
   return (
     <div style={{ position: 'absolute', top: y, left: x }}>

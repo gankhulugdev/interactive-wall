@@ -16,6 +16,7 @@ export const Guitar = ({ x, y }) => {
     } else if (ongoingInstruments.length === 0) setIsActive(false)
   }, [ongoingInstruments])
 
+
   return (
     <div style={{ position: 'absolute', top: y, left: x }}>
       <svg

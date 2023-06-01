@@ -12,6 +12,7 @@ import { Cello } from './components/cello'
 export const InteractiveWallContext = createContext()
 function App() {
   const [trigger, setTrigger] = useState(null)
+  const [scale, setScale] = useState('scale(1,1)')
   const [ongoingInstruments, setOngoingInstruments] = useState([])
 
   return (
@@ -21,6 +22,8 @@ function App() {
         setOngoingInstruments,
         trigger,
         setTrigger,
+        setScale,
+        scale,
       }}
     >
       <Audios>

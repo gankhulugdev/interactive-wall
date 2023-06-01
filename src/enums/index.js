@@ -1,7 +1,7 @@
 export const SENSOR_ENUMS = {
     Guitar: 0,
     Piano: 1,
-    Guitar2: 2,
+    Drum: 2,
     Guitar3: 3,
     Guitar4: 4,
     Beat: 5,
