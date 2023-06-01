@@ -1,0 +1,39 @@
+body {
+  margin: 0px;
+}
+.App {
+  background: #fff;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+
+.acoustic-guitar-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.acoustic-guitar-svg {
+  width: 200px;
+}
+.acoustic-guitar-svg.active {
+  filter: drop-shadow(0 0 30px yellow);
+}
+/* .guitar-face {
+  animation: fill-colors 0.7 infinite;
+} */
+/* 
+@keyframes fill-colors {
+  0% {
+    fill: red;
+  }
+  50% {
+    fill: blue;
+  }
+  100% {
+    fill: green;
+  }
+} */
