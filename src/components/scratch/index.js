@@ -5,15 +5,11 @@ import { scratches } from '../audio'
 import './index.css'
 
 export const Scratch = ({ x, y }) => {
-  const { isTurnedOn, setIsTurnedOn, currentScratchIndex } = useContext(InteractiveWallContext)
+  const {} = useContext(InteractiveWallContext)
   const [isActive, setIsActive] = useState(false)
 
-  useEffect(() => {
-    if (!isTurnedOn) setIsActive(false)
-  }, [isTurnedOn])
-
   return (
-    <div style={{ position: 'absolute', top: x, left: y }}>
+    <div style={{ position: 'absolute', top: y, left: x }}>
       <svg className="scratch-svg" viewBox="0 0 924.09 661.63" xmlns="http://www.w3.org/2000/svg">
         <g strokeWidth=".216">
           <g stroke="#000">

@@ -1,3 +1,14 @@
-.scratch-svg {
+.shaker-chicken-svg {
   width: 200px;
+  position: absolute;
+  top: 500px;
+  left: 1150px;
+  z-index: 10;
+}
+.shaker-karaoke-svg {
+  width: 550px;
+  position: absolute;
+  top: 350px;
+  left: 950px;
+  z-index: 9;
 }

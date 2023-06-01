@@ -1,6 +1,5 @@
-import { createContext, useRef, useState } from 'react'
+import { createContext, useEffect, useRef, useState } from 'react'
 import { Guitar } from './components/guitar'
-
 import './App.css'
 import { Audios } from './components/audio'
 import { Scratch } from './components/scratch'
@@ -10,42 +9,30 @@ import { Shaker } from './components/shaker'
 import { Piano } from './components/piano'
 import { Cello } from './components/cello'
 
-// const client = new w3cwebsocket("ws://localhost:8025/processing");
 export const InteractiveWallContext = createContext()
 function App() {
-  const [isTurnedOn, setIsTurnedOn] = useState(true)
-
-  const currentDrumIndex = useRef(-1)
-  const currentCelloIndex = useRef(-1)
-  const currentGuitarIndex = useRef(-1)
-  const currentPianoIndex = useRef(-1)
-  const currentSaxoIndex = useRef(-1)
-  const currentScratchIndex = useRef(-1)
-  const currentShakerIndex = useRef(-1)
+  const [trigger, setTrigger] = useState(null)
+  const [ongoingInstruments, setOngoingInstruments] = useState([])
 
   return (
     <InteractiveWallContext.Provider
       value={{
-        isTurnedOn,
-        setIsTurnedOn,
-        currentDrumIndex,
-        currentCelloIndex,
-        currentGuitarIndex,
-        currentPianoIndex,
-        currentSaxoIndex,
-        currentScratchIndex,
-        currentShakerIndex,
+        ongoingInstruments,
+        setOngoingInstruments,
+        trigger,
+        setTrigger,
       }}
     >
       <Audios>
-        <div style={{ position: 'relative' }}>
+        <div className="App" style={{ position: 'relative' }}>
+          <button onClick={() => setOngoingInstruments([])}>Stop all</button>
           <Guitar x={100} y={100} />
-          <Scratch x={100} y={300} />
-          <Drum x={100} y={500} />
-          <Piano x={100} y={900} />
-          <Saxophone x={100} y={100} />
-          <Shaker x={100} y={100} />
-          <Cello x={500} y={500}/>
+          <Scratch x={350} y={100} />
+          <Piano x={750} y={70} />
+          <Saxophone x={350} y={400} />
+          <Drum x={700} y={300} />
+          <Cello x={1050} y={-200} />
+          <Shaker />
         </div>
       </Audios>
     </InteractiveWallContext.Provider>

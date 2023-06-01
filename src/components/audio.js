@@ -1,5 +1,5 @@
 // import "./style.css";
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 // import { w3cwebsocket } from "websocket";
 import { Howl } from 'howler'
 
@@ -60,34 +60,134 @@ import shaker1 from '../assets/audio/shakers/shaker-1.mp3'
 import shaker2 from '../assets/audio/shakers/shaker-2.mp3'
 import shaker3 from '../assets/audio/shakers/shaker-3.mp3'
 import { InteractiveWallContext } from '../App'
+import { SENSOR_ENUMS } from '../enums'
+
+import { w3cwebsocket } from 'websocket'
+const client = new w3cwebsocket('ws://localhost:8025/processing')
+
+const tempo = 85
+const timeSnap = (60 / tempo) * 1000 * 8 // Assuming a 4/4 time signature
+
+const beats = [
+  new Howl({ src: beat1, loop: true, volume: 2.0 }),
+  // new Howl({ src: beat2, loop: true, volume: 1.5 }),
+  // new Howl({ src: beat3, loop: true, volume: 1.5 }),
+  // new Howl({ src: beat4, loop: true, volume: 1.5 }),
+  // new Howl({ src: beat5, loop: true, volume: 1.5 }),
+  // new Howl({ src: beat6, loop: true, volume: 1.5 }),
+  // new Howl({ src: beat7, loop: true, volume: 1.5 }),
+  // new Howl({ src: beat8, loop: true, volume: 1.5 }),
+]
+
+const cellos = [
+  new Howl({ src: cell1, loop: true }),
+  // new Howl({ src: cell2, loop: true }),
+  // new Howl({ src: cell3, loop: true }),
+  // new Howl({ src: cell4, loop: true }),
+]
+
+const guitars = [
+  new Howl({ src: guitar3, loop: true }),
+  // new Howl({ src: guitar4, loop: true }),
+  // new Howl({ src: guitar5, loop: true }),
+  // new Howl({ src: guitar6, loop: true }),
+  // new Howl({ src: guitar1, loop: true }),
+  // new Howl({ src: guitar2, loop: true }),
+]
+
+const pianos = [
+  new Howl({ src: piano1, loop: true }),
+  // new Howl({ src: piano2, loop: true }),
+  // new Howl({ src: piano3, loop: true }),
+  // new Howl({ src: piano4, loop: true }),
+  // new Howl({ src: piano5, loop: true }),
+  // new Howl({ src: piano6, loop: true }),
+  // new Howl({ src: piano7, loop: true }),
+  // new Howl({ src: piano8, loop: true }),
+  // new Howl({ src: piano9, loop: true }),
+]
+
+const saxos = [
+  new Howl({ src: saxo1, loop: true }),
+  // new Howl({ src: saxo2, loop: true }),
+  // new Howl({ src: saxo3, loop: true }),
+  // new Howl({ src: saxo4, loop: true }),
+  // new Howl({ src: saxo5, loop: true }),
+  // new Howl({ src: saxo6, loop: true }),
+]
+
+const scratches = [
+  new Howl({ src: scratch1 }),
+  // new Howl({ src: scratch2 }),
+  // new Howl({ src: scratch3 }),
+  // new Howl({ src: scratch4 }),
+]
+
+const shakers = [
+  // new Howl({ src: shaker1, loop: true }),
+  // new Howl({ src: shaker2, loop: true }),
+  // new Howl({ src: shaker3, loop: true }),
+]
 
 export const Audios = ({ children }) => {
-  const {
-    currentDrumIndex,
-    currentCelloIndex,
-    currentGuitarIndex,
-    currentPianoIndex,
-    currentSaxoIndex,
-    currentScratchIndex,
-    currentShakerIndex,
-  } = useContext(InteractiveWallContext)
+  const currentBeatIndex = useRef(-1)
+  const currentCelloIndex = useRef(-1)
+  const currentGuitarIndex = useRef(-1)
+  const currentPianoIndex = useRef(-1)
+  const currentSaxoIndex = useRef(-1)
+  const currentScratchIndex = useRef(-1)
+  const currentShakerIndex = useRef(-1)
 
-  const [trigger, setTrigger] = useState(null)
+  const { setOngoingInstruments, trigger, setTrigger } = useContext(InteractiveWallContext)
 
   useEffect(() => {
-    // client.onopen = () => {
-    //   console.log("websocket client connected");
-    // };
-    // client.onmessage = (message) => {
-    //   const dataFromProcessing = JSON.parse(message.data);
-    //   console.log(`Sensor ${dataFromProcessing} touched`);
-    // };
+    console.log(client)
+    client.onopen = () => {
+      console.log('websocket client connected')
+    }
+    client.onmessage = (message) => {
+      const sensorNum = JSON.parse(message.data)
+      console.log(`Sensor ${sensorNum} touched`)
+      if (sensorNum === SENSOR_ENUMS.StopAll) {
+        setOngoingInstruments([])
+        currentBeatIndex.current = -1
+        currentCelloIndex.current = -1
+        currentGuitarIndex.current = -1
+        currentPianoIndex.current = -1
+        currentSaxoIndex.current = -1
+        currentScratchIndex.current = -1
+        currentShakerIndex.current = -1
+      } else {
+        switch (sensorNum) {
+          case 0:
+            currentGuitarIndex.current =
+              guitars.length - 1 === currentGuitarIndex.current ? -1 : currentGuitarIndex.current + 1
+            console.log('guitar activated')
+            console.log('currentGuitarIndex.current', currentGuitarIndex.current)
+            console.log('currentBeatIndex.current', currentBeatIndex.current)
+            break
+          case 5:
+            console.log('beat activated')
+            currentBeatIndex.current = beats.length - 1 === currentBeatIndex.current ? -1 : currentBeatIndex.current + 1
+            break
+          case SENSOR_ENUMS.Piano:
+            currentPianoIndex.current =
+              pianos.length - 1 === currentPianoIndex.current ? -1 : currentPianoIndex.current + 1
+            break
+          default:
+            break
+        }
+        setOngoingInstruments((c) => {
+          if (c.length === 0) setTrigger(new Date())
+          return [...c.filter((c) => c !== sensorNum), sensorNum]
+        })
+      }
+    }
+    // }, [])
 
-    // setBeats((curr) => {
-    //   return [...curr, new Howl({ src: beat1 }), new Howl({ src: beat2 })];
-    // });
-
+    // useEffect(() => {
     const intervalId = setInterval(() => {
+      console.log('setInterval')
       setTrigger(new Date())
     }, timeSnap)
 
@@ -97,10 +197,13 @@ export const Audios = ({ children }) => {
   }, [])
 
   useEffect(() => {
-    if (beats.length > 0) {
+    console.log(currentBeatIndex.current)
+    if (beats.length > 0 && currentBeatIndex.current > -1) {
       beats.forEach((beat, idx) => {
+        beat = new Howl({ src: beat1, loop: true, volume: 2.0 })
         if (beat.state() === 'loaded') {
-          if (idx === currentDrumIndex.current) !beat.playing() && beat.play()
+          console.log('beat loop', currentBeatIndex.current)
+          if (idx === currentBeatIndex.current) !beat.playing() && beat.play()
           else beat.playing() && beat.stop()
         }
       })
@@ -159,16 +262,7 @@ export const Audios = ({ children }) => {
         }
       })
     }
-  }, [
-    trigger,
-    currentGuitarIndex,
-    currentDrumIndex,
-    currentCelloIndex,
-    currentPianoIndex,
-    currentSaxoIndex,
-    currentScratchIndex,
-    currentShakerIndex,
-  ])
+  }, [trigger])
 
   // const switchToNextSample = () => {
   //   console.log("switched");
@@ -188,7 +282,10 @@ export const Audios = ({ children }) => {
       <div>
         <button
           onClick={() => {
-            currentDrumIndex.current = beats.length - 1 === currentDrumIndex.current ? -1 : currentDrumIndex.current + 1
+            console.log('bbb')
+            currentBeatIndex.current = beats.length - 1 === currentBeatIndex.current ? -1 : currentBeatIndex.current + 1
+            currentGuitarIndex.current =
+              guitars.length - 1 === currentGuitarIndex.current ? -1 : currentGuitarIndex.current + 1
           }}
         >
           change Beat
@@ -251,67 +348,3 @@ export const Audios = ({ children }) => {
     </div>
   )
 }
-
-const tempo = 85
-const timeSnap = (60 / tempo) * 1000 * 8 // Assuming a 4/4 time signature
-
-export const beats = [
-  new Howl({ src: beat1, loop: true, volume: 2.0 }),
-  new Howl({ src: beat2, loop: true, volume: 1.5 }),
-  new Howl({ src: beat3, loop: true, volume: 1.5 }),
-  new Howl({ src: beat4, loop: true, volume: 1.5 }),
-  new Howl({ src: beat5, loop: true, volume: 1.5 }),
-  new Howl({ src: beat6, loop: true, volume: 1.5 }),
-  new Howl({ src: beat7, loop: true, volume: 1.5 }),
-  new Howl({ src: beat8, loop: true, volume: 1.5 }),
-]
-
-export const cellos = [
-  new Howl({ src: cell1, loop: true }),
-  new Howl({ src: cell2, loop: true }),
-  new Howl({ src: cell3, loop: true }),
-  new Howl({ src: cell4, loop: true }),
-]
-
-export const guitars = [
-  new Howl({ src: guitar1, loop: true }),
-  new Howl({ src: guitar2, loop: true }),
-  new Howl({ src: guitar3, loop: true }),
-  new Howl({ src: guitar4, loop: true }),
-  new Howl({ src: guitar5, loop: true }),
-  new Howl({ src: guitar6, loop: true }),
-]
-
-export const pianos = [
-  new Howl({ src: piano1, loop: true }),
-  new Howl({ src: piano2, loop: true }),
-  new Howl({ src: piano3, loop: true }),
-  new Howl({ src: piano4, loop: true }),
-  new Howl({ src: piano5, loop: true }),
-  new Howl({ src: piano6, loop: true }),
-  new Howl({ src: piano7, loop: true }),
-  new Howl({ src: piano8, loop: true }),
-  new Howl({ src: piano9, loop: true }),
-]
-
-export const saxos = [
-  new Howl({ src: saxo1, loop: true }),
-  new Howl({ src: saxo2, loop: true }),
-  new Howl({ src: saxo3, loop: true }),
-  new Howl({ src: saxo4, loop: true }),
-  new Howl({ src: saxo5, loop: true }),
-  new Howl({ src: saxo6, loop: true }),
-]
-
-export const scratches = [
-  new Howl({ src: scratch1 }),
-  new Howl({ src: scratch2 }),
-  new Howl({ src: scratch3 }),
-  new Howl({ src: scratch4 }),
-]
-
-export const shakers = [
-  new Howl({ src: shaker1, loop: true }),
-  new Howl({ src: shaker2, loop: true }),
-  new Howl({ src: shaker3, loop: true }),
-]

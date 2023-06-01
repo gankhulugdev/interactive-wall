@@ -1,19 +1,13 @@
 // import drumSet from '/drum-set.svg'
 import { useContext, useEffect, useState } from 'react'
-import { InteractiveWallContext } from '../../App'
 import { scratches } from '../audio'
 import './index.css'
 
 export const Cello = ({ x, y }) => {
-  const { isTurnedOn, setIsTurnedOn, currentScratchIndex } = useContext(InteractiveWallContext)
   const [isActive, setIsActive] = useState(false)
 
-  useEffect(() => {
-    if (!isTurnedOn) setIsActive(false)
-  }, [isTurnedOn])
-
   return (
-    <div style={{ position: 'absolute', top: x, left: y }}>
+    <div style={{ position: 'absolute', top: y, left: x }}>
       <svg
         className="cello-svg"
         xmlnsDc="http://purl.org/dc/elements/1.1/"

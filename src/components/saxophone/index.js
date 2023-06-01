@@ -5,15 +5,11 @@ import { scratches } from '../audio'
 import './index.css'
 
 export const Saxophone = ({ x, y }) => {
-  const { isTurnedOn, setIsTurnedOn, currentScratchIndex } = useContext(InteractiveWallContext)
+  const {} = useContext(InteractiveWallContext)
   const [isActive, setIsActive] = useState(false)
 
-  useEffect(() => {
-    if (!isTurnedOn) setIsActive(false)
-  }, [isTurnedOn])
-
   return (
-    <div style={{ position: 'absolute', top: x, left: y }}>
+    <div style={{ position: 'absolute', top: y, left: x }}>
       <svg
         xmlnsDc="http://purl.org/dc/elements/1.1/"
         xmlnsCc="http://creativecommons.org/ns#"
@@ -28,7 +24,7 @@ export const Saxophone = ({ x, y }) => {
         version="1.1"
         inkscapeVersion="0.91 r13725"
         sodipodiDocname="Trompete-lineart.svg"
-        style={{ width: 300 }}
+        className="saxo-svg"
       >
         <title id="title5730">Trompete - lineart</title>
         <defs id="defs4">

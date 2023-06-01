@@ -1,31 +1,33 @@
 // import drumSet from '/drum-set.svg'
 import { useContext, useEffect, useState } from 'react'
 import { InteractiveWallContext } from '../../App'
-import { guitars } from '../audio'
 import './index.css'
+import { SENSOR_ENUMS } from '../../enums'
 
 const strokeWidth = '2'
 
 export const Guitar = ({ x, y }) => {
-  const { isTurnedOn, setIsTurnedOn, currentGuitarIndex } = useContext(InteractiveWallContext)
+  const { ongoingInstruments } = useContext(InteractiveWallContext)
   const [isActive, setIsActive] = useState(false)
 
   useEffect(() => {
-    if (!isTurnedOn) setIsActive(false)
-  }, [isTurnedOn])
+    if (ongoingInstruments.includes(SENSOR_ENUMS.Guitar) && !isActive) {
+      setIsActive(true)
+    } else if (ongoingInstruments.length === 0) setIsActive(false)
+  }, [ongoingInstruments])
 
   return (
-    <div style={{ position: 'absolute', top: x, left: y }}>
+    <div style={{ position: 'absolute', top: y, left: x }}>
       <svg
         className={`acoustic-guitar-svg ${isActive ? 'active' : ''}`}
         viewBox="0 0 370.80182 992.01428"
         xmlns="http://www.w3.org/2000/svg"
-        onClick={() => {
-          currentGuitarIndex.current =
-            guitars.length - 1 === currentGuitarIndex.current ? -1 : currentGuitarIndex.current + 1
-          setIsActive(true)
-          setIsTurnedOn(true)
-        }}
+        // onClick={() => {
+        //   currentGuitarIndex.current =
+        //     guitars.length - 1 === currentGuitarIndex.current ? -1 : currentGuitarIndex.current + 1
+        //   currentBeatIndex.current = beats.length - 1 === currentBeatIndex.current ? -1 : currentBeatIndex.current + 1
+        //   setIsActive(true)
+        // }}
       >
         <defs>
           <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -61,16 +63,16 @@ export const Guitar = ({ x, y }) => {
         <g transform="translate(-193.01 -24.64)">
           <path
             d="m328.73 550.27c-88.234 10.157-106.43 37.829-112.54 95.354-3.4054 32.045 23.067 58.659 24.688 90.844 2.1134 41.971-61.652 107.79-44.406 180.66 8.0376 33.961 40.81 67.148 79.125 82.656-20.264-11.262-35.431-28.15-40.625-50.094-17.245-72.866 47.52-153.5 45.406-195.47-1.6206-32.185-31.062-70.611-27.656-102.66 6.1131-57.525 35.606-81.247 100.94-93.707-11.938-4.3868-12.704-3.5687-24.936-7.5845z"
-            fill={isActive ? 'url(#waveGradient)' : '#fff'}
-            // fill="#fff"
+            fill={isActive ? 'url(#waveGradient)' : '#000'}
+            // fill="#000"
             fillRule="evenodd"
             stroke="#000"
             strokeWidth={strokeWidth}
           />
           <path
             d="m377.11 554.81c-88.234 10.157-118.27 39.222-124.39 96.746-3.4054 32.045 26.021 70.484 27.642 102.67 2.1134 41.971-62.657 122.6-45.412 195.47 12.318 52.048 80.756 75.67 140.18 63.181 31.381-6.5946 73.109-17.004 102.67-31.591 46.192-22.793 91.247-79.863 84.9-150.06-3.8375-42.435-60.186-87.673-65.156-125.38-4.6172-35.031 23.622-94.597-6.9104-128.34-32.244-35.631-79.983-26.567-113.53-22.706z"
-            fill={isActive ? 'url(#waveGradient)' : '#fff'}
-            // fill="#fff"
+            fill={isActive ? 'url(#waveGradient)' : '#000'}
+            // fill="#000"
             // className={isActive ? 'guitar-face' : ''}
             fillRule="evenodd"
             stroke="#000"
@@ -78,34 +80,34 @@ export const Guitar = ({ x, y }) => {
           />
           <path
             d="m328.09 197.24c-4.921-12.149-11.425-23.903-23.734-34.205l-16.055-131.24c4.8864-4.5712 9.7728-3.5255 14.659-0.69806 9.2736-9.0386 16.08-6.9744 21.64 0.69806 5.1191-0.63939 10.238-2.9404 15.357 3.4903l33.507 127.75c-8.5354 6.1556-8.256 19.363-7.6787 32.809l-37.695 1.3961z"
-            fill={isActive ? 'url(#waveGradient)' : '#fff'}
-            // fill="#fff"
+            fill={isActive ? 'url(#waveGradient)' : '#000'}
+            // fill="#000"
             fillRule="evenodd"
             stroke="#000"
           />
           <path
             d="m288.5 33.375c-1.0407 0.81946-2.194 1.9154-3.6875 3.3125l16.062 131.22c12.309 10.302 23.704 26.257 28.625 38.406l-1.4062-9.0625c-4.921-12.149-11.441-23.917-23.75-34.219l-15.844-129.66z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
           />
           <path
             d="m352.43 557.77-22.706-7.8976c-0.16549-17.608 2.8025-25.816 7.8976-27.642 4.1658 5.9306 6.9172 11.218 13.701 9.2938l1.107 26.246z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
             strokeWidth={strokeWidth}
           />
           <path
             d="m333.8 834.83 0.86744 28.978c32.306-16.08 34.165 7.4386 75.028-2.9616 37.449-9.5313 34.475-35.084 62.194-29.616l-0.9872-26.655-137.1 30.254z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
             strokeWidth={strokeWidth}
           />
           <path
             d="m371.95 834.55 0.26004 6.8005 67.13-15.282 0.30271-6.2752-67.693 14.757z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
             strokeWidth={strokeWidth}
@@ -113,73 +115,73 @@ export const Guitar = ({ x, y }) => {
           <path
             transform="matrix(1.4569 .29718 -.34059 1.2713 60.039 -306.97)"
             d="m428.61 697.92a39.789 50.086 0 1 1 -79.579 0 39.789 50.086 0 1 1 79.579 0z"
-            fill="#fff"
+            fill="#000"
             stroke="#000"
             strokeWidth=".7155"
           />
           <path
             transform="matrix(1.2904 .27188 -.30164 1.163 97.632 -221.59)"
             d="m428.61 697.92a39.789 50.086 0 1 1 -79.579 0 39.789 50.086 0 1 1 79.579 0z"
-            fill="#fff"
+            fill="#000"
             stroke="#000"
             strokeWidth=".79487"
           />
           <path
             transform="matrix(1.1574 .24176 -.27055 1.0342 127.64 -119.96)"
             d="m428.61 697.92a39.789 50.086 0 1 1 -79.579 0 39.789 50.086 0 1 1 79.579 0z"
-            fill="#fff"
+            fill="#000"
             stroke="#000"
             strokeWidth=".89005"
           />
           <path
             d="m360.2 651.68 54.449-6.2943-47.468-448.84-39.091 0.69806 32.111 454.44z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
           />
           <path
             transform="matrix(.97409 .21489 -.22771 .91922 169 -29.268)"
             d="m428.61 697.92a39.789 50.086 0 1 1 -79.579 0 39.789 50.086 0 1 1 79.579 0z"
-            fill="#a99d9d50"
+            fill={isActive ? '#a99d9d50' : '#000'}
             stroke="#000"
             strokeWidth="1.029"
           />
-          <g fill="#fff" stroke="#000">
+          <g fill="#000" stroke="#000">
             <path d="m307.75 62.188c-4.4957 0-8.125 3.0917-8.125 6.9062s3.6293 6.9062 8.125 6.9062 8.1563-3.0917 8.1562-6.9062c0-1.0021-0.23466-1.9527-0.6875-2.8125l-6.2188 5.7812c-4.7478-1.1165-4.3579-3.5055-3.9688-5.9062l4.75-3.75c-0.64498-0.13957-1.3353-0.21875-2.0312-0.21875z" />
             <path
               d="m305.05 66.143c-0.38916 2.4008-0.79899 4.8067 3.9488 5.9232l6.9104-6.4168c2.1472-2.9387-1.5541-6.3618-3.9488-4.936l-6.9104 5.4296z"
               fillRule="evenodd"
             />
           </g>
-          <g transform="translate(3.9488 30.11)" fill="#fff" stroke="#000">
+          <g transform="translate(3.9488 30.11)" fill="#000" stroke="#000">
             <path d="m307.75 62.188c-4.4957 0-8.125 3.0917-8.125 6.9062s3.6293 6.9062 8.125 6.9062 8.1563-3.0917 8.1562-6.9062c0-1.0021-0.23466-1.9527-0.6875-2.8125l-6.2188 5.7812c-4.7478-1.1165-4.3579-3.5055-3.9688-5.9062l4.75-3.75c-0.64498-0.13957-1.3353-0.21875-2.0312-0.21875z" />
             <path
               d="m305.05 66.143c-0.38916 2.4008-0.79899 4.8067 3.9488 5.9232l6.9104-6.4168c2.1472-2.9387-1.5541-6.3618-3.9488-4.936l-6.9104 5.4296z"
               fillRule="evenodd"
             />
           </g>
-          <g transform="translate(8.8849 62.688)" fill="#fff" stroke="#000">
+          <g transform="translate(8.8849 62.688)" fill="#000" stroke="#000">
             <path d="m307.75 62.188c-4.4957 0-8.125 3.0917-8.125 6.9062s3.6293 6.9062 8.125 6.9062 8.1563-3.0917 8.1562-6.9062c0-1.0021-0.23466-1.9527-0.6875-2.8125l-6.2188 5.7812c-4.7478-1.1165-4.3579-3.5055-3.9688-5.9062l4.75-3.75c-0.64498-0.13957-1.3353-0.21875-2.0312-0.21875z" />
             <path
               d="m305.05 66.143c-0.38916 2.4008-0.79899 4.8067 3.9488 5.9232l6.9104-6.4168c2.1472-2.9387-1.5541-6.3618-3.9488-4.936l-6.9104 5.4296z"
               fillRule="evenodd"
             />
           </g>
-          <g transform="translate(45.905 63.181)" fill="#fff" stroke="#000">
+          <g transform="translate(45.905 63.181)" fill="#000" stroke="#000">
             <path d="m307.75 62.188c-4.4957 0-8.125 3.0917-8.125 6.9062s3.6293 6.9062 8.125 6.9062 8.1563-3.0917 8.1562-6.9062c0-1.0021-0.23466-1.9527-0.6875-2.8125l-6.2188 5.7812c-4.7478-1.1165-4.3579-3.5055-3.9688-5.9062l4.75-3.75c-0.64498-0.13957-1.3353-0.21875-2.0312-0.21875z" />
             <path
               d="m305.05 66.143c-0.38916 2.4008-0.79899 4.8067 3.9488 5.9232l6.9104-6.4168c2.1472-2.9387-1.5541-6.3618-3.9488-4.936l-6.9104 5.4296z"
               fillRule="evenodd"
             />
           </g>
-          <g transform="translate(38.995 31.097)" fill="#fff" stroke="#000">
+          <g transform="translate(38.995 31.097)" fill="#000" stroke="#000">
             <path d="m307.75 62.188c-4.4957 0-8.125 3.0917-8.125 6.9062s3.6293 6.9062 8.125 6.9062 8.1563-3.0917 8.1562-6.9062c0-1.0021-0.23466-1.9527-0.6875-2.8125l-6.2188 5.7812c-4.7478-1.1165-4.3579-3.5055-3.9688-5.9062l4.75-3.75c-0.64498-0.13957-1.3353-0.21875-2.0312-0.21875z" />
             <path
               d="m305.05 66.143c-0.38916 2.4008-0.79899 4.8067 3.9488 5.9232l6.9104-6.4168c2.1472-2.9387-1.5541-6.3618-3.9488-4.936l-6.9104 5.4296z"
               fillRule="evenodd"
             />
           </g>
-          <g transform="translate(30.603 -3.6719e-7)" fill="#fff" stroke="#000">
+          <g transform="translate(30.603 -3.6719e-7)" fill="#000" stroke="#000">
             <path d="m307.75 62.188c-4.4957 0-8.125 3.0917-8.125 6.9062s3.6293 6.9062 8.125 6.9062 8.1563-3.0917 8.1562-6.9062c0-1.0021-0.23466-1.9527-0.6875-2.8125l-6.2188 5.7812c-4.7478-1.1165-4.3579-3.5055-3.9688-5.9062l4.75-3.75c-0.64498-0.13957-1.3353-0.21875-2.0312-0.21875z" />
             <path
               d="m305.05 66.143c-0.38916 2.4008-0.79899 4.8067 3.9488 5.9232l6.9104-6.4168c2.1472-2.9387-1.5541-6.3618-3.9488-4.936l-6.9104 5.4296z"
@@ -188,194 +190,199 @@ export const Guitar = ({ x, y }) => {
           </g>
           <path
             d="m288.02 65.649-5.6764 0.4936c-0.84297-5.4168-6.7894-12.172-14.808-3.4552-4.5997 5.0002-2.48 14.966 5.4296 17.77 7.5918 2.6906 12.101-7.1496 9.8721-9.3785h5.9232l-0.74041-5.4296z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
           />
           <path
             d="m292.21 98.227-5.6764 0.4936c-0.84297-5.4168-6.7894-12.172-14.808-3.4552-4.5997 5.0002-2.48 14.966 5.4296 17.77 7.5918 2.6906 12.101-7.1496 9.8721-9.3785h5.9232l-0.74041-5.4296z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
           />
           <path
             d="m296.16 128.83-5.6764 0.49361c-0.84297-5.4168-6.7894-12.172-14.808-3.4552-4.5997 5.0002-2.48 14.966 5.4296 17.77 7.5918 2.6906 12.101-7.1496 9.8721-9.3785h5.9232l-0.74041-5.4296z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
           />
           <path
             d="m348.78 60.719c-0.72743-0.00772-1.3934 0.14559-2.0312 0.375l5.4688 20.938c6.7008-3.438 8.2727-12.446 3.9688-17.125-2.7564-2.9964-5.2627-4.1648-7.4062-4.1875z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
           />
           <path
             d="m357.67 94.037c-0.72743-0.00772-1.3934 0.14559-2.0312 0.375l5.4688 20.938c6.7008-3.438 8.2727-12.446 3.9688-17.125-2.7564-2.9964-5.2627-4.1648-7.4062-4.1875z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
           />
           <path
             d="m365.56 124.15c-0.72743-0.00772-1.3934 0.14559-2.0312 0.375l5.4688 20.938c6.7008-3.438 8.2727-12.446 3.9688-17.125-2.7564-2.9964-5.2627-4.1648-7.4062-4.1875z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
           />
           <path
             d="m327.7 197.95 0.75562 6.7634 40.332-1.6113-0.90588-6.2744-40.181 1.1222z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
           />
           <path
             d="m331.09 239.6 0.71439 3.786 40.571-1.6613-0.85478-4.6785-40.431 2.5538z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
             strokeWidth=".75163"
           />
           <path
             d="m333.19 270.8 0.67491 3.7933 40.587-1.2386-0.80601-4.6872-40.455 2.1325z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
             strokeWidth=".75163"
           />
           <path
             d="m335.3 303.73 0.73695 3.768 43.993-1.4623-0.88032-4.6561-43.85 2.3504z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
             strokeWidth=".78034"
           />
           <path
             d="m337.39 333.85 0.76246 3.7604 44.669-1.6656-0.91138-4.6468-44.52 2.5521z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
             strokeWidth=".78593"
           />
           <path
             d="m339.48 363.17 0.76246 3.7604 44.669-1.6656-0.91138-4.6468-44.52 2.5521z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
             strokeWidth=".78593"
           />
           <path
             d="m341.58 389.44 0.84954 3.7368 45.995-2.5345-1.018-4.6183-45.827 3.4159z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
             strokeWidth=".79696"
           />
           <path
             d="m342.92 413.57 0.85169 2.7044 46.111-1.8343-1.0206-3.3424-45.942 2.4722z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
             strokeWidth=".67885"
           />
           <path
             d="m344.32 437.31 0.902 2.6948 48.835-1.8277-1.0809-3.3304-48.656 2.4634z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
             strokeWidth=".69736"
           />
           <path
             d="m346.44 460.06 1.037 2.6541 48.688-4.0123-1.2478-3.2816-48.477 4.6398z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
             strokeWidth=".69771"
           />
           <path
             d="m347.83 481 1.037 2.6541 48.688-4.0123-1.2478-3.2816-48.477 4.6398z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
             strokeWidth=".69771"
           />
           <path
             d="m349.93 501.94 1.037 2.6541 48.688-4.0123-1.2478-3.2816-48.477 4.6398z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
             strokeWidth=".69771"
           />
           <path
             d="m351.32 519.39 1.037 2.6541 48.688-4.0123-1.2478-3.2816-48.477 4.6398z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
             strokeWidth=".69771"
           />
           <path
             d="m352.72 537.54 1.037 2.6541 48.688-4.0123-1.2478-3.2816-48.477 4.6398z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
             strokeWidth=".69771"
           />
           <path
             d="m352.73 554.29 1.1094 2.6458 52.083-3.9998-1.3348-3.2714-51.857 4.6254z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
             strokeWidth=".7205"
           />
           <path
             d="m354.13 571.05 1.1094 2.6458 52.083-3.9998-1.3348-3.2714-51.857 4.6254z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
             strokeWidth=".7205"
           />
           <path
             d="m354.13 586.4 1.1094 2.6458 52.083-3.9998-1.3348-3.2714-51.857 4.6254z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
             strokeWidth=".7205"
           />
           <path
             d="m354.13 586.4 1.1094 2.6458 52.083-3.9998-1.3348-3.2714-51.857 4.6254z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
             strokeWidth=".7205"
           />
           <path
             d="m355.52 599.67 1.1094 2.6458 52.083-3.9998-1.3348-3.2714-51.857 4.6254z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
             strokeWidth=".7205"
           />
           <path
             d="m357.62 612.23 1.1094 2.6458 52.083-3.9998-1.3348-3.2714-51.857 4.6254z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
             strokeWidth=".7205"
           />
           <path
             d="m358.31 624.1 1.1094 2.6458 52.083-3.9998-1.3348-3.2714-51.857 4.6254z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
             strokeWidth=".7205"
           />
           <path
             d="m359.74 637.92 1.1646 2.6219 51.987-5.091-1.4032-3.2427-51.749 5.7117z"
-            fill="#fff"
+            fill="#000"
             fillRule="evenodd"
             stroke="#000"
             strokeWidth=".7205"
           />
-          <g fill="none" stroke="#888488" strokeWidth="2">
+          <g
+            fill="none"
+            //  stroke="#888488"
+            stroke={isActive ? '#888488' : 'black'}
+            strokeWidth="2"
+          >
             <path d="m390.91 849.92-50.26-654.78-24.432-94.238" />
             <path d="m381.14 849.92-47.468-654.78-11.867-59.335" />
             <path d="m434.19 837.36-67.014-642.22-11.867-56.543" />

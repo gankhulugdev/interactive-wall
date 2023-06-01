@@ -1,29 +1,62 @@
 // import drumSet from '/drum-set.svg'
 import { useContext, useEffect, useState } from 'react'
 import { InteractiveWallContext } from '../../App'
-import { scratches } from '../audio'
+import { pianos } from '../audio'
 import './index.css'
 
 export const Piano = ({ x, y }) => {
-  const { isTurnedOn, setIsTurnedOn, currentScratchIndex } = useContext(InteractiveWallContext)
+  const {} = useContext(InteractiveWallContext)
   const [isActive, setIsActive] = useState(false)
 
-  useEffect(() => {
-    if (!isTurnedOn) setIsActive(false)
-  }, [isTurnedOn])
-
   return (
-    <div style={{ position: 'absolute', top: x, left: y }}>
+    <div style={{ position: 'absolute', top: y, left: x }}>
       <svg
         version="1.0"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 2604.000000 2604.000000"
         preserveAspectRatio="xMidYMid meet"
         style={{ width: '300px' }}
+        onClick={() => {
+          // currentPianoIndex.current =
+          //   pianos.length - 1 === currentPianoIndex.current ? -1 : currentPianoIndex.current + 1
+          // setIsActive(true)
+        }}
       >
+        <defs>
+          <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="pink">
+              <animate
+                attributeName="stop-color"
+                values="pink; yellow; white"
+                // values="#b7d3fe; #f7c2be; #fdffd8"
+                dur="0.32s"
+                repeatCount="indefinite"
+              />
+            </stop>
+            <stop offset="50%" stopColor="yellow">
+              <animate
+                attributeName="stop-color"
+                values="yellow; white; pink"
+                // values="#f7c2be; #fdffd8; #b7d3fe"
+                dur="0.32s"
+                repeatCount="indefinite"
+              />
+            </stop>
+            <stop offset="100%" stopColor="white">
+              <animate
+                attributeName="stop-color"
+                values="white; pink;yellow"
+                // values="#fdffd8; #b7d3fe; #f7c2be"
+                dur="0.32s"
+                repeatCount="indefinite"
+              />
+            </stop>
+          </linearGradient>
+        </defs>
         <g transform="translate(0.000000,2604.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
           <path
             stroke="#000"
+            fill={isActive ? 'url(#waveGradient)' : '#000'}
             d="M8775 21729 c-1148 -46 -2171 -280 -2840 -647 -222 -123 -378 -235
 -539 -392 -198 -191 -309 -357 -418 -620 -36 -85 -674 -1678 -1418 -3539
 l-1353 -3384 -5 -97 c-5 -106 6 -172 43 -255 67 -151 226 -283 438 -365 l72
