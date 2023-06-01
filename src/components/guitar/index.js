@@ -1,8 +1,8 @@
 // import drumSet from '/drum-set.svg'
 import { useContext, useEffect, useState } from 'react'
 import { InteractiveWallContext } from '../../App'
-import './index.css'
 import { SENSOR_ENUMS } from '../../enums'
+import './index.css'
 
 const strokeWidth = '2'
 
@@ -20,47 +20,49 @@ export const Guitar = ({ x, y }) => {
   return (
     <div style={{ position: 'absolute', top: y, left: x }}>
       <svg
-        className={`acoustic-guitar-svg ${isActive ? 'active' : ''}`}
+        className={`guitar-svg ${isActive ? 'active' : ''}`}
         viewBox="0 0 370.80182 992.01428"
         xmlns="http://www.w3.org/2000/svg"
-        // onClick={() => {
-        //   currentGuitarIndex.current =
-        //     guitars.length - 1 === currentGuitarIndex.current ? -1 : currentGuitarIndex.current + 1
-        //   currentBeatIndex.current = beats.length - 1 === currentBeatIndex.current ? -1 : currentBeatIndex.current + 1
-        //   setIsActive(true)
-        // }}
       >
         <defs>
           <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="pink">
+            <stop offset="0%" stopColor="#b7d3fe">
               <animate
                 attributeName="stop-color"
-                values="pink; yellow; white"
-                // values="#b7d3fe; #f7c2be; #fdffd8"
+                // values="pink; yellow; white"
+                values="#b7d3fe; #f7c2be; #fdffd8"
                 dur="0.32s"
                 repeatCount="indefinite"
               />
             </stop>
-            <stop offset="50%" stopColor="yellow">
+            <stop offset="50%" stopColor="#f7c2be">
               <animate
                 attributeName="stop-color"
-                values="yellow; white; pink"
-                // values="#f7c2be; #fdffd8; #b7d3fe"
+                // values="yellow; white; pink"
+                values="#f7c2be; #fdffd8; #b7d3fe"
                 dur="0.32s"
                 repeatCount="indefinite"
               />
             </stop>
-            <stop offset="100%" stopColor="white">
+            <stop offset="100%" stopColor="#fdffd8">
               <animate
                 attributeName="stop-color"
-                values="white; pink;yellow"
-                // values="#fdffd8; #b7d3fe; #f7c2be"
+                // values="white; pink;yellow"
+                values="#fdffd8; #b7d3fe; #f7c2be"
                 dur="0.32s"
                 repeatCount="indefinite"
               />
             </stop>
           </linearGradient>
         </defs>
+        {/* <use href="#string-wave" stroke-dasharray="10, 5">
+          <animate
+            attributeName="stroke-dashoffset"
+            dur="4s"
+            repeatCount="indefinite"
+            values="0; -15; -30; -45; -60; -75; -90"
+          />
+        </use> */}
         <g transform="translate(-193.01 -24.64)">
           <path
             d="m328.73 550.27c-88.234 10.157-106.43 37.829-112.54 95.354-3.4054 32.045 23.067 58.659 24.688 90.844 2.1134 41.971-61.652 107.79-44.406 180.66 8.0376 33.961 40.81 67.148 79.125 82.656-20.264-11.262-35.431-28.15-40.625-50.094-17.245-72.866 47.52-153.5 45.406-195.47-1.6206-32.185-31.062-70.611-27.656-102.66 6.1131-57.525 35.606-81.247 100.94-93.707-11.938-4.3868-12.704-3.5687-24.936-7.5845z"
@@ -381,15 +383,39 @@ export const Guitar = ({ x, y }) => {
           <g
             fill="none"
             //  stroke="#888488"
-            stroke={isActive ? '#888488' : 'black'}
+            // stroke={isActive ? '#888488' : 'black'}
             strokeWidth="2"
           >
-            <path d="m390.91 849.92-50.26-654.78-24.432-94.238" />
-            <path d="m381.14 849.92-47.468-654.78-11.867-59.335" />
-            <path d="m434.19 837.36-67.014-642.22-11.867-56.543" />
-            <path d="m403.48 849.92-55.845-654.78-33.507-122.86" />
-            <path d="m425.82 842.94-65.618-649.89-18.848-90.748" />
-            <path d="m413.95 849.23-60.033-655.48-23.036-122.86" />
+            <path
+              id={isActive ? 'guitar-string1' : ''}
+              stroke={isActive ? '#fffb5f' : 'black'}
+              d="m390.91 849.92-50.26-654.78-24.432-94.238"
+            />
+            <path
+              id={isActive ? 'guitar-string2' : ''}
+              stroke={isActive ? '#94eef8' : 'black'}
+              d="m381.14 849.92-47.468-654.78-11.867-59.335"
+            />
+            <path
+              id={isActive ? 'guitar-string3' : ''}
+              stroke={isActive ? '#fdacfc' : 'black'}
+              d="m434.19 837.36-67.014-642.22-11.867-56.543"
+            />
+            <path
+              id={isActive ? 'guitar-string4' : ''}
+              stroke={isActive ? '#b2f6b9' : 'black'}
+              d="m403.48 849.92-55.845-654.78-33.507-122.86"
+            />
+            <path
+              id={isActive ? 'guitar-string5' : ''}
+              stroke={isActive ? '#dbadfc' : 'black'}
+              d="m425.82 842.94-65.618-649.89-18.848-90.748"
+            />
+            <path
+              id={isActive ? 'guitar-string6' : ''}
+              stroke={isActive ? '#f16c5c' : 'black'}
+              d="m413.95 849.23-60.033-655.48-23.036-122.86"
+            />
           </g>
         </g>
       </svg>

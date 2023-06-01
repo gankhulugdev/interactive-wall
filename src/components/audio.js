@@ -87,10 +87,10 @@ const cellos = [
 ]
 
 const guitars = [
-  new Howl({ src: guitar3, loop: true }),
-  new Howl({ src: guitar4, loop: true }),
   new Howl({ src: guitar5, loop: true }),
   new Howl({ src: guitar6, loop: true }),
+  new Howl({ src: guitar3, loop: true }),
+  new Howl({ src: guitar4, loop: true }),
   new Howl({ src: guitar1, loop: true }),
   new Howl({ src: guitar2, loop: true }),
 ]
@@ -320,6 +320,9 @@ export const Audios = ({ children }) => {
 
             currentGuitarIndex.current =
               guitars.length - 1 === currentGuitarIndex.current ? -1 : currentGuitarIndex.current + 1
+            setOngoingInstruments((c) => {
+              return [...c.filter((c) => c !== SENSOR_ENUMS.Guitar), SENSOR_ENUMS.Guitar]
+            })
           }}
         >
           change Guitar
@@ -334,6 +337,9 @@ export const Audios = ({ children }) => {
             })
             currentPianoIndex.current =
               pianos.length - 1 === currentPianoIndex.current ? -1 : currentPianoIndex.current + 1
+            setOngoingInstruments((c) => {
+              return [...c.filter((c) => c !== SENSOR_ENUMS.Piano), SENSOR_ENUMS.Piano]
+            })
           }}
         >
           change Piano
