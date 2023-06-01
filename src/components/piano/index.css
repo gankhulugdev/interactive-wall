@@ -8,14 +8,11 @@
 }
 
 .piano-g {
-  --border-size: 3px;
-  --border-angle: 0turn;
-  animation: running-border 3s linear infinite;
-  background-image: linear-gradient(from 0turn, #213, #112 50%, #213),
-    linear-gradient(from 0turn, transparent 20%, #08f, #f03);
-  background-size: calc(100% - 6px) calc(100% - 6px), cover;
-  background-position: center center;
-  background-repeat: no-repeat;
+  fill: none;
+  stroke: #362f3c;
+  stroke-width: 18px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 @keyframes running-border {

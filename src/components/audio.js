@@ -312,12 +312,6 @@ export const Audios = ({ children }) => {
 
         <button
           onClick={() => {
-            //Below code is testing purpose
-            setOngoingInstruments((c) => {
-              if (c.length === 0) setTrigger(new Date())
-              return [...c.filter((c) => c !== SENSOR_ENUMS.Guitar), SENSOR_ENUMS.Guitar]
-            })
-
             currentGuitarIndex.current =
               guitars.length - 1 === currentGuitarIndex.current ? -1 : currentGuitarIndex.current + 1
             setOngoingInstruments((c) => {
@@ -330,11 +324,6 @@ export const Audios = ({ children }) => {
 
         <button
           onClick={() => {
-            //Below code is testing purpose
-            setOngoingInstruments((c) => {
-              if (c.length === 0) setTrigger(new Date())
-              return [...c.filter((c) => c !== SENSOR_ENUMS.Piano), SENSOR_ENUMS.Piano]
-            })
             currentPianoIndex.current =
               pianos.length - 1 === currentPianoIndex.current ? -1 : currentPianoIndex.current + 1
             setOngoingInstruments((c) => {
