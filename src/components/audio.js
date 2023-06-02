@@ -197,14 +197,15 @@ export const Audios = ({ children }) => {
   }, [])
 
   useEffect(() => {
-    console.log(currentBeatIndex.current)
-    if (beats.length > 0 && currentBeatIndex.current > -1) {
+    if (beats.length > 0) {
       beats.forEach((beat, idx) => {
-        beat = new Howl({ src: beat1, loop: true, volume: 2.0 })
         if (beat.state() === 'loaded') {
-          console.log('beat loop', currentBeatIndex.current)
-          if (idx === currentBeatIndex.current) !beat.playing() && beat.play()
+          if (idx === currentBeatIndex.current)
+            !beat.playing() &&
+              beat.play() &&
+              setOngoingInstruments((c) => [...c.filter((c) => c !== SENSOR_ENUMS.Drum), SENSOR_ENUMS.Drum])
           else beat.playing() && beat.stop()
+          currentBeatIndex.current === -1 && setOngoingInstruments((c) => c.filter((c) => c !== SENSOR_ENUMS.Drum))
         }
       })
     }
@@ -212,8 +213,12 @@ export const Audios = ({ children }) => {
     if (cellos.length > 0) {
       cellos.forEach((cello, idx) => {
         if (cello.state() === 'loaded') {
-          if (idx === currentCelloIndex.current) !cello.playing() && cello.play()
+          if (idx === currentCelloIndex.current)
+            !cello.playing() &&
+              cello.play() &&
+              setOngoingInstruments((c) => [...c.filter((c) => c !== SENSOR_ENUMS.Cello), SENSOR_ENUMS.Cello])
           else cello.playing() && cello.stop()
+          currentCelloIndex.current === -1 && setOngoingInstruments((c) => c.filter((c) => c !== SENSOR_ENUMS.Cello))
         }
       })
     }
@@ -221,8 +226,12 @@ export const Audios = ({ children }) => {
     if (guitars.length > 0) {
       guitars.forEach((guitar, idx) => {
         if (guitar.state() === 'loaded') {
-          if (idx === currentGuitarIndex.current) !guitar.playing() && guitar.play()
+          if (idx === currentGuitarIndex.current)
+            !guitar.playing() &&
+              guitar.play() &&
+              setOngoingInstruments((c) => [...c.filter((c) => c !== SENSOR_ENUMS.Guitar), SENSOR_ENUMS.Guitar])
           else guitar.playing() && guitar.stop()
+          currentGuitarIndex.current === -1 && setOngoingInstruments((c) => c.filter((c) => c !== SENSOR_ENUMS.Guitar))
         }
       })
     }
@@ -230,8 +239,12 @@ export const Audios = ({ children }) => {
     if (pianos.length > 0) {
       pianos.forEach((piano, idx) => {
         if (piano.state() === 'loaded') {
-          if (idx === currentPianoIndex.current) !piano.playing() && piano.play()
+          if (idx === currentPianoIndex.current)
+            !piano.playing() &&
+              piano.play() &&
+              setOngoingInstruments((c) => [...c.filter((c) => c !== SENSOR_ENUMS.Piano), SENSOR_ENUMS.Piano])
           else piano.playing() && piano.stop()
+          currentPianoIndex.current === -1 && setOngoingInstruments((c) => c.filter((c) => c !== SENSOR_ENUMS.Piano))
         }
       })
     }
@@ -239,8 +252,12 @@ export const Audios = ({ children }) => {
     if (saxos.length > 0) {
       saxos.forEach((saxo, idx) => {
         if (saxo.state() === 'loaded') {
-          if (idx === currentSaxoIndex.current) !saxo.playing() && saxo.play()
+          if (idx === currentSaxoIndex.current)
+            !saxo.playing() &&
+              saxo.play() &&
+              setOngoingInstruments((c) => [...c.filter((c) => c !== SENSOR_ENUMS.Sax), SENSOR_ENUMS.Sax])
           else saxo.playing() && saxo.stop()
+          currentSaxoIndex.current === -1 && setOngoingInstruments((c) => c.filter((c) => c !== SENSOR_ENUMS.Sax))
         }
       })
     }
@@ -248,8 +265,13 @@ export const Audios = ({ children }) => {
     if (scratches.length > 0) {
       scratches.forEach((scratch, idx) => {
         if (scratch.state() === 'loaded') {
-          if (idx === currentScratchIndex.current) !scratch.playing() && scratch.play()
+          if (idx === currentScratchIndex.current)
+            !scratch.playing() &&
+              scratch.play() &&
+              setOngoingInstruments((c) => [...c.filter((c) => c !== SENSOR_ENUMS.Scratch), SENSOR_ENUMS.Scratch])
           else scratch.playing() && scratch.stop()
+          currentScratchIndex.current === -1 &&
+            setOngoingInstruments((c) => c.filter((c) => c !== SENSOR_ENUMS.Scratch))
         }
       })
     }
@@ -257,8 +279,12 @@ export const Audios = ({ children }) => {
     if (shakers.length > 0) {
       shakers.forEach((shaker, idx) => {
         if (shaker.state() === 'loaded') {
-          if (idx === currentShakerIndex.current) !shaker.playing() && shaker.play()
+          if (idx === currentShakerIndex.current)
+            !shaker.playing() &&
+              shaker.play() &&
+              setOngoingInstruments((c) => [...c.filter((c) => c !== SENSOR_ENUMS.Shaker), SENSOR_ENUMS.Shaker])
           else shaker.playing() && shaker.stop()
+          currentShakerIndex.current === -1 && setOngoingInstruments((c) => c.filter((c) => c !== SENSOR_ENUMS.Shaker))
         }
       })
     }
@@ -282,11 +308,6 @@ export const Audios = ({ children }) => {
       <div>
         <button
           onClick={() => {
-            setOngoingInstruments((c) => {
-              // if (c.length === 0) setTrigger(new Date())
-              return [...c.filter((c) => c !== SENSOR_ENUMS.Drum), SENSOR_ENUMS.Drum]
-            })
-
             currentBeatIndex.current = beats.length - 1 === currentBeatIndex.current ? -1 : currentBeatIndex.current + 1
           }}
         >
@@ -306,9 +327,6 @@ export const Audios = ({ children }) => {
           onClick={() => {
             currentGuitarIndex.current =
               guitars.length - 1 === currentGuitarIndex.current ? -1 : currentGuitarIndex.current + 1
-            setOngoingInstruments((c) => {
-              return [...c.filter((c) => c !== SENSOR_ENUMS.Guitar), SENSOR_ENUMS.Guitar]
-            })
           }}
         >
           change Guitar
@@ -318,9 +336,6 @@ export const Audios = ({ children }) => {
           onClick={() => {
             currentPianoIndex.current =
               pianos.length - 1 === currentPianoIndex.current ? -1 : currentPianoIndex.current + 1
-            setOngoingInstruments((c) => {
-              return [...c.filter((c) => c !== SENSOR_ENUMS.Piano), SENSOR_ENUMS.Piano]
-            })
           }}
         >
           change Piano
@@ -329,9 +344,6 @@ export const Audios = ({ children }) => {
         <button
           onClick={() => {
             currentSaxoIndex.current = saxos.length - 1 === currentSaxoIndex.current ? -1 : currentSaxoIndex.current + 1
-            setOngoingInstruments((c) => {
-              return [...c.filter((c) => c !== SENSOR_ENUMS.Sax), SENSOR_ENUMS.Sax]
-            })
           }}
         >
           change Saxo
@@ -341,9 +353,6 @@ export const Audios = ({ children }) => {
           onClick={() => {
             currentScratchIndex.current =
               scratches.length - 1 === currentScratchIndex.current ? -1 : currentScratchIndex.current + 1
-              setOngoingInstruments((c) => {
-                return [...c.filter((c) => c !== SENSOR_ENUMS.Scratch), SENSOR_ENUMS.Scratch]
-              })
           }}
         >
           change scratch

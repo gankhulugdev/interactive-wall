@@ -9,6 +9,7 @@ const strokeWidth = '2'
 export const Guitar = ({ x, y }) => {
   const { ongoingInstruments } = useContext(InteractiveWallContext)
   const [isActive, setIsActive] = useState(false)
+  console.log(ongoingInstruments)
 
   useEffect(() => {
     if (ongoingInstruments.includes(SENSOR_ENUMS.Guitar) && !isActive) {
