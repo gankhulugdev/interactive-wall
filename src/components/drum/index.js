@@ -5,7 +5,7 @@ import { SENSOR_ENUMS } from '../../enums'
 import { InteractiveWallContext } from '../../App'
 
 export const Drum = ({ x, y }) => {
-  const { ongoingInstruments, scale } = useContext(InteractiveWallContext)
+  const { ongoingInstruments } = useContext(InteractiveWallContext)
   const [isActive, setIsActive] = useState(false)
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export const Drum = ({ x, y }) => {
   return (
     <div style={{ position: 'absolute', top: y, left: x }}>
       <svg
-        className={`drum-svg ${isActive ? 'glowing-effect' : ''}`}
+        className={`drum-svg ${isActive ? 'drum-glowing-effect' : ''}`}
         xmlns="http://www.w3.org/2000/svg"
         version="1.1"
         x="0%"
@@ -27,7 +27,7 @@ export const Drum = ({ x, y }) => {
         height="100%"
         viewBox="0 0 3000.0 3000.0"
         enableBackground="new 0 0 3000.0 3000.0"
-        transform={scale}
+        transform={'scale(1.2,1.2)'}
       >
         <defs>
           <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -437,7 +437,7 @@ export const Drum = ({ x, y }) => {
         />{' '}
         <path
           fill="#000000"
-          stroke="#020202"
+          stroke={isActive ? "url(#drumWaveGradient2)" : "#000"}
           fillOpacity="0.000"
           strokeOpacity="1.000"
           fillRule="nonzero"
@@ -448,7 +448,7 @@ export const Drum = ({ x, y }) => {
         />{' '}
         <path
           fill="#000000"
-          stroke="#020202"
+          stroke={isActive ? "url(#drumWaveGradient2)" : "#000"}
           fillOpacity="0.000"
           strokeOpacity="1.000"
           fillRule="nonzero"
@@ -459,7 +459,7 @@ export const Drum = ({ x, y }) => {
         />{' '}
         <path
           fill="#000000"
-          stroke="#020202"
+          stroke={isActive ? "url(#drumWaveGradient2)" : "#000"}
           fillOpacity="0.000"
           strokeOpacity="1.000"
           fillRule="nonzero"

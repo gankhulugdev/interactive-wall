@@ -3,14 +3,22 @@ import { useContext, useEffect, useState } from 'react'
 import { InteractiveWallContext } from '../../App'
 import { scratches } from '../audio'
 import './index.css'
+import { SENSOR_ENUMS } from '../../enums'
 
 export const Saxophone = ({ x, y }) => {
-  const {} = useContext(InteractiveWallContext)
+  const { ongoingInstruments } = useContext(InteractiveWallContext)
   const [isActive, setIsActive] = useState(false)
+
+  useEffect(() => {
+    if (ongoingInstruments.includes(SENSOR_ENUMS.Sax) && !isActive) {
+      setIsActive(true)
+    } else if (ongoingInstruments.length === 0) setIsActive(false)
+  }, [ongoingInstruments])
 
   return (
     <div style={{ position: 'absolute', top: y, left: x }}>
       <svg
+        className={`saxo-svg ${isActive ? 'active' : ''}`}
         xmlnsDc="http://purl.org/dc/elements/1.1/"
         xmlnsCc="http://creativecommons.org/ns#"
         xmlnsRdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -24,7 +32,6 @@ export const Saxophone = ({ x, y }) => {
         version="1.1"
         inkscapeVersion="0.91 r13725"
         sodipodiDocname="Trompete-lineart.svg"
-        className="saxo-svg"
       >
         <title id="title5730">Trompete - lineart</title>
         <defs id="defs4">
@@ -46,34 +53,41 @@ export const Saxophone = ({ x, y }) => {
             <rect id="rect5021" height="2" width="1" y="-0.5" x="0" style={{ fill: 'black', stroke: 'none' }} />
           </pattern>
         </defs>
-        {/* <sodipodi:namedview
-          id="base"
-          pagecolor="#ffffff"
-          bordercolor="#666666"
-          borderopacity="1.0"
-          inkscape:pageopacity="0.0"
-          inkscape:pageshadow="2"
-          inkscape:zoom="0.7"
-          inkscapeCx="80.79335"
-          inkscapeCy="43.598569"
-          inkscape:document-units="mm"
-          inkscapeCurrent-layer="layer1"
-          showgrid="false"
-          inkscape:snap-global="false"
-          inkscape:window-width="1153"
-          inkscape:window-height="834"
-          inkscape:window-x="667"
-          inkscape:window-y="135"
-          inkscape:window-maximized="0"
-          fit-margin-top="1"
-          fit-margin-right="1"
-          fit-margin-bottom="1"
-          fit-margin-left="1"
-        /> */}
+        <defs>
+          <linearGradient id="sax-waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="##ffd35b">
+              <animate
+                attributeName="stop-color"
+                // values="pink; yellow; white"
+                values="#ffd35b; #ffba42; #fa5a201"
+                dur="0.32s"
+                repeatCount="indefinite"
+              />
+            </stop>
+            <stop offset="50%" stopColor="#ffba42">
+              <animate
+                attributeName="stop-color"
+                // values="yellow; white; pink"
+                values="#ffba42; #fa5a201; #ffd35b"
+                dur="0.32s"
+                repeatCount="indefinite"
+              />
+            </stop>
+            <stop offset="100%" stopColor="#fa5a201">
+              <animate
+                attributeName="stop-color"
+                // values="white; pink;yellow"
+                values="#fa5a201; #ffd35b; #ffba42"
+                dur="0.32s"
+                repeatCount="indefinite"
+              />
+            </stop>
+          </linearGradient>
+        </defs>
         <g inkscapeLabel="Ebene 1" inkscapeGroupmode="layer" id="layer1" transform="translate(-139.19103,-264.80471)">
           <path
             style={{
-              fill: '#ffffff',
+              fill: isActive ? 'url(#sax-waveGradient)' : '#000',
               fillOpacity: '1',
               fillRule: 'evenodd',
               stroke: '#000000',
@@ -91,7 +105,7 @@ export const Saxophone = ({ x, y }) => {
           />
           <path
             style={{
-              fill: '#ffffff',
+              fill: isActive ? 'url(#sax-waveGradient)' : '#000',
               fillOpacity: '1',
               fillRule: 'evenodd',
               stroke: '#000000',
@@ -109,7 +123,7 @@ export const Saxophone = ({ x, y }) => {
           />
           <path
             style={{
-              fill: '#ffffff',
+              fill: isActive ? 'url(#sax-waveGradient)' : '#000',
               fillOpacity: '1',
               fillRule: 'evenodd',
               stroke: '#000000',
@@ -132,7 +146,7 @@ export const Saxophone = ({ x, y }) => {
               overflow: 'visible',
               visibility: 'visible',
               opacity: '1',
-              fill: '#ffffff',
+              fill: isActive ? 'url(#sax-waveGradient)' : '#000',
               fillOpacity: '1',
               fillRule: 'evenodd',
               stroke: '#000000',
@@ -152,7 +166,7 @@ export const Saxophone = ({ x, y }) => {
           />
           <path
             style={{
-              fill: '#ffffff',
+              fill: '#000',
               fillOpacity: '1',
               fillRule: 'evenodd',
               stroke: '#000000',
@@ -170,7 +184,7 @@ export const Saxophone = ({ x, y }) => {
           />
           <path
             style={{
-              fill: 'url(#pattern5726)',
+              fill: isActive ? 'url(#drumWaveGradient2)' : '#000',
               fillOpacity: '1',
               fillRule: 'evenodd',
               stroke: 'none',
@@ -186,7 +200,7 @@ export const Saxophone = ({ x, y }) => {
           />
           <path
             style={{
-              fill: 'none',
+              fill: isActive ? 'url(#drumWaveGradient2)' : '#000',
               fillRule: 'evenodd',
               stroke: '#000000',
               strokeWidth: '1.0629921',
@@ -203,7 +217,7 @@ export const Saxophone = ({ x, y }) => {
           />
           <path
             style={{
-              fill: 'none',
+              fill: isActive ? 'url(#drumWaveGradient2)' : '#000',
               fillRule: 'evenodd',
               stroke: '#000000',
               strokeWidth: '0.99921262',
@@ -235,7 +249,7 @@ export const Saxophone = ({ x, y }) => {
           />
           <path
             style={{
-              fill: '#ffffff',
+              fill: isActive ? 'url(#drumWaveGradient2)' : '#000',
               fillOpacity: '1',
               fillRule: 'evenodd',
               stroke: '#000000',
@@ -251,7 +265,7 @@ export const Saxophone = ({ x, y }) => {
           />
           <path
             style={{
-              fill: '#ffffff',
+              fill: isActive ? 'url(#drumWaveGradient2)' : '#000',
               fillOpacity: '1',
               fillRule: 'evenodd',
               stroke: '#000000',
@@ -269,7 +283,7 @@ export const Saxophone = ({ x, y }) => {
           />
           <path
             style={{
-              fill: '#ffffff',
+              fill: isActive ? 'url(#drumWaveGradient2)' : '#000',
               fillOpacity: '1',
               fillRule: 'evenodd',
               stroke: '#000000',
@@ -287,7 +301,7 @@ export const Saxophone = ({ x, y }) => {
           />
           <path
             style={{
-              fill: '#ffffff',
+              fill: isActive ? 'url(#drumWaveGradient2)' : '#000',
               fillOpacity: '1',
               fillRule: 'evenodd',
               stroke: '#000000',
@@ -305,7 +319,7 @@ export const Saxophone = ({ x, y }) => {
           />
           <path
             style={{
-              fill: 'none',
+              fill: isActive ? 'url(#drumWaveGradient2)' : '#000',
               fillRule: 'evenodd',
               stroke: '#000000',
               strokeWidth: '1.0629921',
@@ -321,7 +335,7 @@ export const Saxophone = ({ x, y }) => {
           />
           <path
             style={{
-              fill: 'none',
+              fill: isActive ? 'url(#drumWaveGradient2)' : '#000',
               fillRule: 'evenodd',
               stroke: '#000000',
               strokeWidth: '1.0629921',
@@ -368,7 +382,7 @@ export const Saxophone = ({ x, y }) => {
           />
           <path
             style={{
-              fill: '#ffffff',
+              fill: isActive ? 'url(#drumWaveGradient2)' : '#000',
               fillOpacity: '1',
               fillRule: 'evenodd',
               stroke: '#000000',
@@ -386,7 +400,7 @@ export const Saxophone = ({ x, y }) => {
           />
           <path
             style={{
-              fill: '#ffffff',
+              fill: isActive ? 'url(#drumWaveGradient2)' : '#000',
               fillOpacity: '1',
               fillRule: 'evenodd',
               stroke: '#000000',
@@ -404,7 +418,7 @@ export const Saxophone = ({ x, y }) => {
           />
           <path
             style={{
-              fill: '#ffffff',
+              fill: isActive ? 'url(#drumWaveGradient2)' : '#000',
               fillOpacity: '1',
               fillRule: 'evenodd',
               stroke: '#000000',

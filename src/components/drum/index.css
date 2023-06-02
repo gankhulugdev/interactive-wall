@@ -1,90 +1,37 @@
 .drum-svg {
   width: 400px;
-  /* transition: 0.2s; */
+}
+.drum-glowing-effect {
   animation: shake 0.5s infinite;
+  transform-origin: center;
+  animation-duration: 0.765s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
-.glowing-effect {
-  animation: glowing 0.7058s ease-in-out infinite;
-  /* animation: shake 0.5s infinite; */
-}
-.drum-shake {
-  animation: shake 0.3s;
-}
+
 @keyframes shake {
   0% {
-    transform: translate(1px, 1px) rotate(0deg);
-  }
-  10% {
-    transform: translate(-1px, -2px) rotate(-1deg);
-  }
-  20% {
-    transform: translate(-3px, 0px) rotate(1deg);
-  }
-  30% {
-    transform: translate(3px, 2px) rotate(0deg);
-  }
-  40% {
-    transform: translate(1px, -1px) rotate(1deg);
-  }
-  50% {
-    transform: translate(-1px, 2px) rotate(-1deg);
-  }
-  60% {
-    transform: translate(-3px, 1px) rotate(0deg);
-  }
-  70% {
-    transform: translate(3px, 1px) rotate(-1deg);
-  }
-  80% {
-    transform: translate(-1px, -1px) rotate(1deg);
-  }
-  90% {
-    transform: translate(1px, 2px) rotate(0deg);
-  }
-  100% {
-    transform: translate(1px, -2px) rotate(-1deg);
-  }
-}
-
-/* // @keyframes glowing {
-//   0% {
-//     filter: drop-shadow(0 0 50px red);
-//   }
-//   20% {
-//     filter: drop-shadow(0 0 50px orange);
-//   }
-//   40% {
-//     filter: drop-shadow(0 0 50px yellow);
-//   }
-//   60% {
-//     filter: drop-shadow(0 0 50px green);
-//   }
-//   80% {
-//     filter: drop-shadow(0 0 50px blue);
-//   }
-//   100% {
-//     filter: drop-shadow(0 0 50px purple);
-//   }
-// } */
-
-@keyframes glowing {
-  0% {
+    -webkit-transform: rotate(0deg);
     filter: drop-shadow(0 0 50px #ff3ea5ff);
+    transform: scale(1);
   }
   25% {
+    -webkit-transform: rotate(1deg);
     filter: drop-shadow(0 0 50px #edff00ff);
   }
   50% {
+    -webkit-transform: rotate(0deg);
     filter: drop-shadow(0 0 50px #00a4ccff);
+    transform: scale(1.06);
   }
   75% {
+    -webkit-transform: rotate(-1deg);
     filter: drop-shadow(0 0 50px #ff3ea5ff);
   }
-  /* // 80% {
-  //   filter: drop-shadow(0 0 50px blue);
-  // } */
   100% {
+    -webkit-transform: rotate(0deg);
     filter: drop-shadow(0 0 50px #edff00ff);
+    transform: scale(1);
   }
 }
 

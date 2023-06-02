@@ -1,3 +1,22 @@
 .scratch-svg {
   width: 300px;
 }
+.scratch-svg.active {
+  filter: drop-shadow(0 0 30px cyan);
+  animation: scratch-lightEffect 0.8s infinite linear;
+}
+
+/* @keyframes spin {
+  0% { transform: rotate(0); }
+  100% { transform: rotate(1111turn); }
+} */
+@keyframes scratch-lightEffect {
+  0% {
+    box-shadow: inset 0 0 10px #fff, 0 0 10px #fff;
+    -webkit-transform: scale(1.02);
+  }
+  100% {
+    box-shadow: inset 0 0 10px #fff, 0 0 50px #fff;
+    -webkit-transform: rotate(1deg);
+  }
+}

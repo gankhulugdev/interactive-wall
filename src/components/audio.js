@@ -138,7 +138,7 @@ export const Audios = ({ children }) => {
   const currentScratchIndex = useRef(-1)
   const currentShakerIndex = useRef(-1)
 
-  const { setOngoingInstruments, trigger, setTrigger, setScale, scale } = useContext(InteractiveWallContext)
+  const { setOngoingInstruments, trigger, setTrigger } = useContext(InteractiveWallContext)
 
   useEffect(() => {
     console.log(client)
@@ -282,20 +282,12 @@ export const Audios = ({ children }) => {
       <div>
         <button
           onClick={() => {
-            if (scale === 'scale(1,1)') {
-              setScale('scale(1.05,1.05)')
-            } else {
-              setScale('scale(1,1)')
-            }
-            console.log('bbb')
             setOngoingInstruments((c) => {
               if (c.length === 0) setTrigger(new Date())
               return [...c.filter((c) => c !== SENSOR_ENUMS.Drum), SENSOR_ENUMS.Drum]
             })
 
             currentBeatIndex.current = beats.length - 1 === currentBeatIndex.current ? -1 : currentBeatIndex.current + 1
-            // currentGuitarIndex.current =
-            //   guitars.length - 1 === currentGuitarIndex.current ? -1 : currentGuitarIndex.current + 1
           }}
         >
           change Beat
@@ -337,6 +329,9 @@ export const Audios = ({ children }) => {
         <button
           onClick={() => {
             currentSaxoIndex.current = saxos.length - 1 === currentSaxoIndex.current ? -1 : currentSaxoIndex.current + 1
+            setOngoingInstruments((c) => {
+              return [...c.filter((c) => c !== SENSOR_ENUMS.Sax), SENSOR_ENUMS.Sax]
+            })
           }}
         >
           change Saxo
@@ -346,6 +341,9 @@ export const Audios = ({ children }) => {
           onClick={() => {
             currentScratchIndex.current =
               scratches.length - 1 === currentScratchIndex.current ? -1 : currentScratchIndex.current + 1
+              setOngoingInstruments((c) => {
+                return [...c.filter((c) => c !== SENSOR_ENUMS.Scratch), SENSOR_ENUMS.Scratch]
+              })
           }}
         >
           change scratch
