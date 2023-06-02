@@ -28,7 +28,7 @@ function App() {
           <button onClick={() => setOngoingInstruments([])}>Stop all</button>
           <Guitar x={100} y={100} />
           <Scratch x={350} y={100} />
-          <Piano x={750} y={70} />
+          <Piano x={670} y={70} />
           <Saxophone x={350} y={400} />
           <Drum x={700} y={300} />
           <Cello x={1050} y={-200} />

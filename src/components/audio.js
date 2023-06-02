@@ -2,6 +2,8 @@
 import { useContext, useEffect, useRef } from 'react'
 // import { w3cwebsocket } from "websocket";
 import { Howl } from 'howler'
+import { InteractiveWallContext } from '../App'
+import { SENSOR_ENUMS } from '../enums'
 
 import beat1 from '../assets/audio/beats/beat-1.mp3'
 import beat2 from '../assets/audio/beats/beat-2.mp3'
@@ -59,8 +61,6 @@ import scratch4 from '../assets/audio/scratch/scratch-4.mp3'
 import shaker1 from '../assets/audio/shakers/shaker-1.mp3'
 import shaker2 from '../assets/audio/shakers/shaker-2.mp3'
 import shaker3 from '../assets/audio/shakers/shaker-3.mp3'
-import { InteractiveWallContext } from '../App'
-import { SENSOR_ENUMS } from '../enums'
 
 import { w3cwebsocket } from 'websocket'
 const client = new w3cwebsocket('ws://localhost:8025/processing')
@@ -69,21 +69,21 @@ const tempo = 85
 const timeSnap = (60 / tempo) * 1000 * 8 // Assuming a 4/4 time signature
 
 const beats = [
-  new Howl({ src: beat1, loop: true, volume: 2.0 }),
-  new Howl({ src: beat2, loop: true, volume: 1.5 }),
   new Howl({ src: beat3, loop: true, volume: 1.5 }),
   new Howl({ src: beat4, loop: true, volume: 1.5 }),
   new Howl({ src: beat5, loop: true, volume: 1.5 }),
   new Howl({ src: beat6, loop: true, volume: 1.5 }),
   new Howl({ src: beat7, loop: true, volume: 1.5 }),
   new Howl({ src: beat8, loop: true, volume: 1.5 }),
+  new Howl({ src: beat1, loop: true, volume: 2.0 }),
+  new Howl({ src: beat2, loop: true, volume: 1.5 }),
 ]
 
 const cellos = [
   new Howl({ src: cell1, loop: true }),
-  // new Howl({ src: cell2, loop: true }),
-  // new Howl({ src: cell3, loop: true }),
-  // new Howl({ src: cell4, loop: true }),
+  new Howl({ src: cell2, loop: true }),
+  new Howl({ src: cell3, loop: true }),
+  new Howl({ src: cell4, loop: true }),
 ]
 
 const guitars = [
@@ -96,7 +96,6 @@ const guitars = [
 ]
 
 const pianos = [
-  new Howl({ src: piano1, loop: true }),
   new Howl({ src: piano2, loop: true }),
   new Howl({ src: piano3, loop: true }),
   new Howl({ src: piano4, loop: true }),
@@ -105,28 +104,29 @@ const pianos = [
   new Howl({ src: piano7, loop: true }),
   new Howl({ src: piano8, loop: true }),
   new Howl({ src: piano9, loop: true }),
+  new Howl({ src: piano1, loop: true }),
 ]
 
 const saxos = [
   new Howl({ src: saxo1, loop: true }),
-  // new Howl({ src: saxo2, loop: true }),
-  // new Howl({ src: saxo3, loop: true }),
-  // new Howl({ src: saxo4, loop: true }),
-  // new Howl({ src: saxo5, loop: true }),
-  // new Howl({ src: saxo6, loop: true }),
+  new Howl({ src: saxo2, loop: true }),
+  new Howl({ src: saxo3, loop: true }),
+  new Howl({ src: saxo4, loop: true }),
+  new Howl({ src: saxo5, loop: true }),
+  new Howl({ src: saxo6, loop: true }),
 ]
 
 const scratches = [
+  new Howl({ src: scratch2 }),
+  new Howl({ src: scratch3 }),
+  new Howl({ src: scratch4 }),
   new Howl({ src: scratch1 }),
-  // new Howl({ src: scratch2 }),
-  // new Howl({ src: scratch3 }),
-  // new Howl({ src: scratch4 }),
 ]
 
 const shakers = [
-  // new Howl({ src: shaker1, loop: true }),
-  // new Howl({ src: shaker2, loop: true }),
-  // new Howl({ src: shaker3, loop: true }),
+  new Howl({ src: shaker1, loop: true }),
+  new Howl({ src: shaker2, loop: true }),
+  new Howl({ src: shaker3, loop: true }),
 ]
 
 export const Audios = ({ children }) => {
@@ -283,7 +283,7 @@ export const Audios = ({ children }) => {
         <button
           onClick={() => {
             setOngoingInstruments((c) => {
-              if (c.length === 0) setTrigger(new Date())
+              // if (c.length === 0) setTrigger(new Date())
               return [...c.filter((c) => c !== SENSOR_ENUMS.Drum), SENSOR_ENUMS.Drum]
             })
 
