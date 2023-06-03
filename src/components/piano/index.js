@@ -36,19 +36,19 @@ export const Piano = ({ x, y }) => {
           </linearGradient>
           <linearGradient id="t">
             <stop stopColor="#131534" offset="0" />
-            <stop stopColor={isActive ? '#050716' : '#000'} offset="1" />
+            <stop stopColor={isActive ? '#050716' : '#fff'} offset="1" />
           </linearGradient>
           <linearGradient id="u">
-            <stop stopColor={isActive ? '#dfe0e2' : '#000'} offset="0" />
-            <stop stopColor={isActive ? '#fafbff' : '#000'} offset="1" />
+            <stop stopColor={isActive ? '#dfe0e2' : '#fff'} offset="0" />
+            <stop stopColor={isActive ? '#fafbff' : '#fff'} offset="1" />
           </linearGradient>
           {/* <linearGradient id="w" x1="-342.86" x2="-342.86" y1="38.231" y2="102.11" gradientUnits="userSpaceOnUse">
             <stop stopColor="#fff" offset="0" />
             <stop stopColor={isActive ? '#050716' : '#000'} stopOpacity="0" offset="1" />
           </linearGradient> */}
           <linearGradient id="v" x1="-342.86" x2="-342.86" y1="-220.19" y2="-181.47" gradientUnits="userSpaceOnUse">
-            <stop stopColor={isActive ? '#171a2d' : '#000'} stopOpacity=".67196" offset="0" />
-            <stop stopColor={isActive ? '#050716' : '#000'} stopOpacity="0" offset="1" />
+            <stop stopColor={isActive ? '#171a2d' : '#fff'} stopOpacity=".67196" offset="0" />
+            <stop stopColor={isActive ? '#050716' : '#fff'} stopOpacity="0" offset="1" />
           </linearGradient>
           <linearGradient id="q" x1="810.97" x2="821.62" gradientUnits="userSpaceOnUse" xlinkHref="#t" />
           <linearGradient id="p" x1="835.65" x2="846.3" gradientUnits="userSpaceOnUse" xlinkHref="#t" />
