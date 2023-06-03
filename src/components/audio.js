@@ -305,7 +305,7 @@ export const Audios = ({ children }) => {
 
   return (
     <div>
-      <div>
+      {/* <div>
         <button
           onClick={() => {
             currentBeatIndex.current = beats.length - 1 === currentBeatIndex.current ? -1 : currentBeatIndex.current + 1
@@ -366,7 +366,7 @@ export const Audios = ({ children }) => {
         >
           change Shaker
         </button>
-      </div>
+      </div> */}
       {children}
     </div>
   )

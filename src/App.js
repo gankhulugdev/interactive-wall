@@ -25,7 +25,7 @@ function App() {
     >
       <Audios>
         <div className="App" style={{ position: 'relative' }}>
-          <button onClick={() => setOngoingInstruments([])}>Stop all</button>
+          {/* <button onClick={() => setOngoingInstruments([])}>Stop all</button> */}
           <Guitar x={100} y={100} />
           <Scratch x={350} y={100} />
           <Piano x={670} y={70} />
