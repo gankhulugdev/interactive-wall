@@ -8,6 +8,7 @@ import { Drum } from './components/drum'
 import { Shaker } from './components/shaker'
 import { Piano } from './components/piano'
 import { Cello } from './components/cello'
+import StopButton from './components/stop-button'
 
 export const InteractiveWallContext = createContext()
 function App() {
@@ -33,6 +34,7 @@ function App() {
           <Drum x={700} y={300} />
           <Cello x={1050} y={-200} />
           <Shaker />
+          <StopButton x={100} y={100} />
         </div>
       </Audios>
     </InteractiveWallContext.Provider>
