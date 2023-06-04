@@ -1,10 +1,17 @@
 // import drumSet from '/drum-set.svg'
 import { useContext, useEffect, useState } from 'react'
-import { scratches } from '../audio'
 import './index.css'
+import { InteractiveWallContext } from '../../App'
+import { SENSOR_ENUMS } from '../../enums'
 
 export const Shaker = ({ x, y }) => {
   const [isActive, setIsActive] = useState(false)
+  const { ongoingInstruments } = useContext(InteractiveWallContext)
+  useEffect(() => {
+    if (ongoingInstruments.includes(SENSOR_ENUMS.Guitar) && !isActive) {
+      setIsActive(true)
+    } else if (ongoingInstruments.length === 0) setIsActive(false)
+  }, [ongoingInstruments])
 
   return (
     <>
@@ -13,15 +20,69 @@ export const Shaker = ({ x, y }) => {
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 2600.000000 2600.000000"
         preserveAspectRatio="xMidYMid meet"
-        className="shaker-karaoke-svg"
+        className={`shaker-karaoke-svg ${isActive ? 'active' : ''}`}
       >
+        <defs>
+          <linearGradient id="chickenWaveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="blue">
+              <animate
+                attributeName="stop-color"
+                values="blue; #FF5161"
+                dur="0.765s"
+                repeatCount="indefinite"
+              />
+            </stop>
+            <stop offset="50%" stopColor="#FF5161">
+              <animate
+                attributeName="stop-color"
+                values="#FF5161; blue"
+                dur="0.765s"
+                repeatCount="indefinite"
+              />
+            </stop>
+            <stop offset="100%" stopColor="blue">
+              <animate
+                attributeName="stop-color"
+                values="blue; #FF5161"
+                dur="0.765s"
+                repeatCount="indefinite"
+              />
+            </stop>
+          </linearGradient>
+          <linearGradient id="karaokeWaveGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="red">
+              <animate
+                attributeName="stop-color"
+                values="black; red; green"
+                dur="0.765s"
+                repeatCount="indefinite"
+              />
+            </stop>
+            <stop offset="50%" stopColor="blue">
+              <animate
+                attributeName="stop-color"
+                values="blue; green; black"
+                dur="0.765s"
+                repeatCount="indefinite"
+              />
+            </stop>
+            <stop offset="100%" stopColor="green">
+              <animate
+                attributeName="stop-color"
+                values="green; black; red"
+                dur="0.765s"
+                repeatCount="indefinite"
+              />
+            </stop>
+          </linearGradient>
+        </defs>
         <g
           transform="translate(0.000000,2000.000000) scale(0.100000,-0.100000) rotate(-30 30 100)"
           fill="#000000"
-          stroke="none"
+          stroke='nones'
         >
           <path
-            fill="#00000099"
+            fill={isActive ? 'url(#karaokeWaveGradient2)' : '#000'}
             d="M15995 19613 c-934 -79 -2059 -536 -3250 -1320 -569 -376 -1125 -801
 -1674 -1282 -541 -474 -1167 -1096 -1643 -1631 -1588 -1787 -2572 -3618 -2689
 -4999 -14 -174 -7 -494 16 -635 45 -285 134 -523 276 -737 51 -77 130 -162
@@ -86,9 +147,11 @@ c-13 -14 -69 -61 -124 -105 -261 -209 -537 -348 -690 -348 -73 0 -80 8 -79 82
         viewBox="0 0 58.978 58.978"
         style={{ enableBackground: 'new 0 0 58.978 58.978' }}
         xmlSpace="preserve"
-        className="shaker-chicken-svg"
+        className={`shaker-chicken-svg ${isActive ? 'active' : ''}`}
+     
       >
         <path
+         fill={isActive ? 'url(#chickenWaveGradient)' : '#000'}
           d="M41.808,34.827c4.094,0,8.489-1.782,11.938-5.231c6.149-6.149,7.001-15.304,1.899-20.405
 	c-5.102-5.103-14.256-4.25-20.405,1.899c-4.988,4.988-6.489,11.952-4.156,17.127l-1.656,1.802l-1.617-1.759
 	c2.155-4.582,1.247-10.61-2.46-15.431c-0.119-0.19-0.247-0.364-0.385-0.502c-0.002-0.002-0.006-0.003-0.008-0.005
