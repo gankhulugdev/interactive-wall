@@ -1,3 +1,38 @@
 .cello-svg {
-  width: 450px;
+  width: 450px;  
+}
+
+.cello-svg.active {
+  filter: drop-shadow(0 0 30px #03ee03);
+  animation: slight-tilt 0.8s infinite linear;
+}
+
+@keyframes slight-tilt {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  25% {
+    -webkit-transform: rotate(3deg);
+  }
+  50% {
+    -webkit-transform: rotate(0deg);
+  }
+  75% {
+    -webkit-transform: rotate(-3deg);
+  }
+  100% {
+    -webkit-transform: rotate(0deg);
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
