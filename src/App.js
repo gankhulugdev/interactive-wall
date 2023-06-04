@@ -27,14 +27,14 @@ function App() {
       <Audios>
         <div className="App" style={{ position: 'relative' }}>
           {/* <button onClick={() => setOngoingInstruments([])}>Stop all</button> */}
-          <Guitar x={100} y={100} />
-          <Scratch x={350} y={100} />
-          <Piano x={670} y={70} />
-          <Saxophone x={350} y={400} />
-          <Drum x={700} y={300} />
-          <Cello x={1050} y={-200} />
+          <Guitar x={50} y={100} />
+          <Scratch x={240} y={200} />
+          <Piano x={600} y={100} />
+          <Saxophone x={320} y={500} />
+          <Drum x={630} y={220} />
+          <Cello x={1000} y={-200} />
           <Shaker />
-          <StopButton x={100} y={100} />
+          <StopButton x={750} y={550} />
         </div>
       </Audios>
     </InteractiveWallContext.Provider>

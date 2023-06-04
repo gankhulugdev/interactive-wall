@@ -1,24 +1,24 @@
 .shaker-chicken-svg {
-  width: 200px;
+  width: 150px;
   position: absolute;
-  top: 500px;
-  left: 1150px;
+  top: 480px;
+  left: 950px;
   z-index: 10;
 }
 .shaker-karaoke-svg {
-  width: 550px;
+  width: 500px;
   position: absolute;
-  top: 350px;
-  left: 950px;
+  top: 330px;
+  left: 750px;
   z-index: 9;
 }
 
 .shaker-karaoke-svg.active {
-  filter: drop-shadow(0 0 100px #fc0578);
+  filter: drop-shadow(0 0 100px #03ee03);
   animation: slight-tilt 0.8s infinite linear;
 }
 .shaker-chicken-svg.active {
-  filter: drop-shadow(0 20pxs 100px #e70303);
+  filter: drop-shadow(0 20pxs 100px #03ee03);
   animation: shakeChicken 0.8s infinite linear;
 }
 
@@ -55,7 +55,7 @@
     -webkit-transform: rotate(6deg);
     filter: drop-shadow(0 0 50px #00a4ccff);
     transform: scale(0.86);
-    opacity: 0;
+    /* opacity: 0; */
   }
   75% {
     -webkit-transform: rotate(12deg);

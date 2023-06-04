@@ -3,8 +3,8 @@
 }
 
 .guitar-svg.active {
-  filter: drop-shadow(0 0 30px #b7d3fe);
-  animation: slight-tilt 0.8s infinite linear;
+  filter: drop-shadow(0 0 50px cyan);
+  animation: slight-tilt 0.5s infinite linear;
 }
 
 @keyframes slight-tilt {

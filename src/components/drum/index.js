@@ -10,7 +10,6 @@ export const Drum = ({ x, y }) => {
 
   useEffect(() => {
     if (ongoingInstruments.includes(SENSOR_ENUMS.Drum) && !isActive) {
-      console.log('HELLO')
       setIsActive(true)
     } else if (ongoingInstruments.length === 0) setIsActive(false)
   }, [ongoingInstruments])

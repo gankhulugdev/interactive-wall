@@ -55,29 +55,29 @@ export const Saxophone = ({ x, y }) => {
         </defs>
         <defs>
           <linearGradient id="sax-waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="##ffd35b">
+            <stop offset="0%" stopColor="pink">
               <animate
                 attributeName="stop-color"
-                // values="pink; yellow; white"
-                values="#ffd35b; #ffba42; #fa5a201"
+                values="pink; yellow; orange"
+                // values="#ffd35b; #ffba42; #fa5a201"
                 dur="0.32s"
                 repeatCount="indefinite"
               />
             </stop>
-            <stop offset="50%" stopColor="#ffba42">
+            <stop offset="50%" stopColor="orange">
               <animate
                 attributeName="stop-color"
-                // values="yellow; white; pink"
-                values="#ffba42; #fa5a201; #ffd35b"
+                values="yellow; orange; pink"
+                // values="#ffba42; #fa5a201; #ffd35b"
                 dur="0.32s"
                 repeatCount="indefinite"
               />
             </stop>
-            <stop offset="100%" stopColor="#fa5a201">
+            <stop offset="100%" stopColor="yellow">
               <animate
                 attributeName="stop-color"
-                // values="white; pink;yellow"
-                values="#fa5a201; #ffd35b; #ffba42"
+                values="orange; pink;yellow"
+                // values="#fa5a201; #ffd35b; #ffba42"
                 dur="0.32s"
                 repeatCount="indefinite"
               />

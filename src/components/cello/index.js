@@ -9,7 +9,7 @@ export const Cello = ({ x, y }) => {
   const { ongoingInstruments } = useContext(InteractiveWallContext)
 
   useEffect(() => {
-    if (ongoingInstruments.includes(SENSOR_ENUMS.Guitar) && !isActive) {
+    if (ongoingInstruments.includes(SENSOR_ENUMS.Cello) && !isActive) {
       setIsActive(true)
     } else if (ongoingInstruments.length === 0) setIsActive(false)
   }, [ongoingInstruments])

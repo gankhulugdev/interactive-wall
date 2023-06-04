@@ -159,28 +159,42 @@ export const Audios = ({ children }) => {
         currentShakerIndex.current = -1
       } else {
         switch (sensorNum) {
-          case 0:
+          case SENSOR_ENUMS.Guitar:
             currentGuitarIndex.current =
               guitars.length - 1 === currentGuitarIndex.current ? -1 : currentGuitarIndex.current + 1
-            console.log('guitar activated')
-            console.log('currentGuitarIndex.current', currentGuitarIndex.current)
-            console.log('currentBeatIndex.current', currentBeatIndex.current)
             break
-          case 5:
-            console.log('beat activated')
+          case SENSOR_ENUMS.Drum:
             currentBeatIndex.current = beats.length - 1 === currentBeatIndex.current ? -1 : currentBeatIndex.current + 1
             break
           case SENSOR_ENUMS.Piano:
             currentPianoIndex.current =
               pianos.length - 1 === currentPianoIndex.current ? -1 : currentPianoIndex.current + 1
             break
+          case SENSOR_ENUMS.Sax:
+            currentSaxoIndex.current =
+              saxos.length - 1 === currentSaxoIndex.current ? -1 : currentSaxoIndex.current + 1
+            break
+          case SENSOR_ENUMS.Scratch:
+            currentScratchIndex.current =
+              scratches.length - 1 === currentScratchIndex.current ? -1 : currentScratchIndex.current + 1
+            break
+          case SENSOR_ENUMS.Shaker:
+            currentShakerIndex.current =
+              shakers.length - 1 === currentShakerIndex.current ? -1 : currentShakerIndex.current + 1
+            break
+          case SENSOR_ENUMS.Cello:
+            currentCelloIndex.current =
+              cellos.length - 1 === currentCelloIndex.current ? -1 : currentCelloIndex.current + 1
+            break
+
+
           default:
             break
         }
-        setOngoingInstruments((c) => {
-          if (c.length === 0) setTrigger(new Date())
-          return [...c.filter((c) => c !== sensorNum), sensorNum]
-        })
+        // setOngoingInstruments((c) => {
+        //   if (c.length === 0) setTrigger(new Date())
+        //   return [...c.filter((c) => c !== sensorNum), sensorNum]
+        // })
       }
     }
     // }, [])
@@ -305,7 +319,7 @@ export const Audios = ({ children }) => {
 
   return (
     <div>
-      {/* <div>
+      {/* <div style={{ position: 'fixed', top: 0, zIndex: 100 }}>
         <button
           onClick={() => {
             currentBeatIndex.current = beats.length - 1 === currentBeatIndex.current ? -1 : currentBeatIndex.current + 1

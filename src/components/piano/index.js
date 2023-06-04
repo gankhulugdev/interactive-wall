@@ -14,7 +14,6 @@ export const Piano = ({ x, y }) => {
     } else if (ongoingInstruments.length === 0) setIsActive(false)
   }, [ongoingInstruments])
 
-  console.log(isActive)
 
   return (
     <div style={{ position: 'absolute', top: y, left: x }}>
@@ -39,8 +38,8 @@ export const Piano = ({ x, y }) => {
             <stop stopColor={isActive ? '#050716' : '#000'} offset="1" />
           </linearGradient>
           <linearGradient id="u">
-            <stop stopColor={isActive ? '#dfe0e2' : '#000'} offset="0" />
-            <stop stopColor={isActive ? '#fafbff' : '#000'} offset="1" />
+            <stop stopColor={isActive ? '#dfe0e2' : '#fff'} offset="0" />
+            <stop stopColor={isActive ? '#fafbff' : '#ffffff50'} offset="1" />
           </linearGradient>
           {/* <linearGradient id="w" x1="-342.86" x2="-342.86" y1="38.231" y2="102.11" gradientUnits="userSpaceOnUse">
             <stop stopColor="#fff" offset="0" />

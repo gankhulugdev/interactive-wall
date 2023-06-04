@@ -1,37 +1,37 @@
 .drum-svg {
-  width: 400px;
+  width: 300px;
 }
 .drum-glowing-effect {
-  animation: shake 0.5s infinite;
+  animation: shake 0.705s infinite;
   transform-origin: center;
-  animation-duration: 0.765s;
+  animation-duration: 0.705;
   animation-iteration-count: infinite;
   animation-direction: alternate;
 }
 
 @keyframes shake {
   0% {
-    -webkit-transform: rotate(0deg);
+    /* -webkit-transform: rotate(0deg); */
     filter: drop-shadow(0 0 50px #ff3ea5ff);
-    transform: scale(1);
+    transform: scale(1.2);
   }
   25% {
-    -webkit-transform: rotate(1deg);
+    /* -webkit-transform: rotate(1deg); */
     filter: drop-shadow(0 0 50px #edff00ff);
   }
   50% {
-    -webkit-transform: rotate(0deg);
+    /* -webkit-transform: rotate(0deg); */
     filter: drop-shadow(0 0 50px #00a4ccff);
-    transform: scale(1.06);
+    transform: scale(1.3);
   }
   75% {
-    -webkit-transform: rotate(-1deg);
+    /* -webkit-transform: rotate(-1deg); */
     filter: drop-shadow(0 0 50px #ff3ea5ff);
   }
   100% {
-    -webkit-transform: rotate(0deg);
+    /* -webkit-transform: rotate(0deg); */
     filter: drop-shadow(0 0 50px #edff00ff);
-    transform: scale(1);
+    transform: scale(1.2);
   }
 }
 

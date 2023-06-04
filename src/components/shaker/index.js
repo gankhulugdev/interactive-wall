@@ -8,7 +8,7 @@ export const Shaker = ({ x, y }) => {
   const [isActive, setIsActive] = useState(false)
   const { ongoingInstruments } = useContext(InteractiveWallContext)
   useEffect(() => {
-    if (ongoingInstruments.includes(SENSOR_ENUMS.Guitar) && !isActive) {
+    if (ongoingInstruments.includes(SENSOR_ENUMS.Shaker) && !isActive) {
       setIsActive(true)
     } else if (ongoingInstruments.length === 0) setIsActive(false)
   }, [ongoingInstruments])
@@ -22,54 +22,29 @@ export const Shaker = ({ x, y }) => {
         preserveAspectRatio="xMidYMid meet"
         className={`shaker-karaoke-svg ${isActive ? 'active' : ''}`}
       >
+        {/* <linearGradient id="chickenWaveGradient" x1="0%" y1="0%" x2="100%" y2="0%"> */}
         <defs>
           <linearGradient id="chickenWaveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="blue">
+            <stop offset="0%" stopColor="#pink">
               <animate
                 attributeName="stop-color"
-                values="blue; #FF5161"
+                values="pink; yellow; white"
                 dur="0.765s"
                 repeatCount="indefinite"
               />
             </stop>
-            <stop offset="50%" stopColor="#FF5161">
+            <stop offset="50%" stopColor="#yellow">
               <animate
                 attributeName="stop-color"
-                values="#FF5161; blue"
+                values="yellow; white; pink"
                 dur="0.765s"
                 repeatCount="indefinite"
               />
             </stop>
-            <stop offset="100%" stopColor="blue">
+            <stop offset="100%" stopColor="#white">
               <animate
                 attributeName="stop-color"
-                values="blue; #FF5161"
-                dur="0.765s"
-                repeatCount="indefinite"
-              />
-            </stop>
-          </linearGradient>
-          <linearGradient id="karaokeWaveGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="red">
-              <animate
-                attributeName="stop-color"
-                values="black; red; green"
-                dur="0.765s"
-                repeatCount="indefinite"
-              />
-            </stop>
-            <stop offset="50%" stopColor="blue">
-              <animate
-                attributeName="stop-color"
-                values="blue; green; black"
-                dur="0.765s"
-                repeatCount="indefinite"
-              />
-            </stop>
-            <stop offset="100%" stopColor="green">
-              <animate
-                attributeName="stop-color"
-                values="green; black; red"
+                values="white; pink;yellow"
                 dur="0.765s"
                 repeatCount="indefinite"
               />
@@ -82,7 +57,7 @@ export const Shaker = ({ x, y }) => {
           stroke='nones'
         >
           <path
-            fill={isActive ? 'url(#karaokeWaveGradient2)' : '#000'}
+            fill={isActive ? 'url(#chickenWaveGradient)' : '#000'}
             d="M15995 19613 c-934 -79 -2059 -536 -3250 -1320 -569 -376 -1125 -801
 -1674 -1282 -541 -474 -1167 -1096 -1643 -1631 -1588 -1787 -2572 -3618 -2689
 -4999 -14 -174 -7 -494 16 -635 45 -285 134 -523 276 -737 51 -77 130 -162
@@ -148,10 +123,10 @@ c-13 -14 -69 -61 -124 -105 -261 -209 -537 -348 -690 -348 -73 0 -80 8 -79 82
         style={{ enableBackground: 'new 0 0 58.978 58.978' }}
         xmlSpace="preserve"
         className={`shaker-chicken-svg ${isActive ? 'active' : ''}`}
-     
+
       >
         <path
-         fill={isActive ? 'url(#chickenWaveGradient)' : '#000'}
+          fill={isActive ? 'url(#chickenWaveGradient)' : '#000'}
           d="M41.808,34.827c4.094,0,8.489-1.782,11.938-5.231c6.149-6.149,7.001-15.304,1.899-20.405
 	c-5.102-5.103-14.256-4.25-20.405,1.899c-4.988,4.988-6.489,11.952-4.156,17.127l-1.656,1.802l-1.617-1.759
 	c2.155-4.582,1.247-10.61-2.46-15.431c-0.119-0.19-0.247-0.364-0.385-0.502c-0.002-0.002-0.006-0.003-0.008-0.005
